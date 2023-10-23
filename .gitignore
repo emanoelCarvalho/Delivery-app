@@ -1,0 +1,10 @@
+
+database/
+
+
+node_modules/
+vendor/
+
+.idea/
+.vscode/
+
