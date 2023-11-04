@@ -1,19 +1,18 @@
-const database = require('../database/connection');
-
+const User = require("../models/user")
 class clientController {
-    novoCliente(req, res) {
-        const {nome, email, endereço, telefone, cpf} = req.body;
-
-        console.log(nome, email, endereço, telefone, cpf);
-
-        database.insert({nome, email, endereço, telefone, cpf}).table("cliente").then(data => {
-            console.log(data);
-            res.json({message: "Cliente criado com sucesso"});
-        }
-        ).catch(error => {
-            console.log(error);
-        });
-    }
+  novoCliente(req, res) {
+    User.create({
+        name: 'Emanoel', 
+        phoneNumber: '545154802', 
+        address: 'Rua caxagá', 
+        email: 'hemanoel@gmail.com', 
+    }).then((response) => {
+        console.log('Retorno da query ',response);
+        return res.json({
+            content: response.dataValues
+        })
+    })
+  }
 }
 
 module.exports = new clientController();
