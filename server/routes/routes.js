@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const clientController = require('../controllers/client');
 
-router.get('/novoCliente', clientController.novoCliente);
+router.post('/novoCliente', clientController.novoCliente);
+router.get('/listarClientes', clientController.listarClientes);
 
 module.exports = router;
