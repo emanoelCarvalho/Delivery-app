@@ -1,14 +1,15 @@
 const {  DataTypes, Model } = require("sequelize");
 const sequelize = require('../database/connection');
 
-class User extends Model {
+class Admin extends Model {
   name;
   phoneNumber;
   address;
   email;
+  password;
 }
 
-User.init({
+Admin.init({
   id: {
     type: DataTypes.INTEGER, 
     autoIncrement: true, 
@@ -30,17 +31,21 @@ User.init({
     type: DataTypes.STRING, 
     allowNull: false
   },
+  password: {
+    type: DataTypes.STRING, 
+    allowNull: false
+  }
 }, {
     sequelize, 
-    modelName: 'User', 
+    modelName: 'Admin', 
     freezeTableName: true
 });
 
-User.sync({
+Admin.sync({
     force: true
 }).then(() => {
-    console.log('A tabela user foi criada');
+    console.log('A tabela admin foi criada');
 })
 
 
-module.exports = User;
+module.exports = Admin;
