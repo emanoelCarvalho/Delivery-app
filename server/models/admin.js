@@ -38,7 +38,7 @@ Admin.init({
 }, {
     sequelize, 
     modelName: 'Admin', 
-    freezeTableName: true
+    // freezeTableName: true
 });
 
 Admin.sync({
