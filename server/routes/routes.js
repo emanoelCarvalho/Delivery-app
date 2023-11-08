@@ -6,5 +6,6 @@ const clientController = require('../controllers/admin');
 router.post('/novoAdmin', clientController.novoCliente);
 router.get('/listarAdmin', clientController.listarClientes);
 router.patch('/updateAdmin/:id', clientController.updateAdmin);
+router.delete( '/deleteAdmin/:id', clientController.deleteAdmin);
 
 module.exports = router;

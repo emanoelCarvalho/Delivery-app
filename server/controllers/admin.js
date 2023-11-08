@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const Admin = require("../models/admin");
 
 class clientController {
@@ -65,6 +66,26 @@ class clientController {
     } catch (error) {
       console.log("Erro ao atualizar cliente: ", error);
       return res.status(500).json({ error: "Erro interno no servidor" });
+    }
+  }
+  async deleteAdmin(req, res) {
+    try {
+      const { id } = req.params;
+
+      const deletedAdmin = await Admin.findByPk(id);
+
+      if (!deletedAdmin) {
+        return res.status(404).json({ message: "Admin não encontrado"});
+      }
+
+      await Admin.destroy({
+        where: {id : id},
+      });
+
+      return res.status(200).json({ message: "Admin deletado co sucesso ", deletedAdmin});
+    } catch (error) {
+      console.log("Erro ao deletar admin", error);
+      return res.status(500).json({ error: "Erro interno no servidor "});
     }
   }
 }
