@@ -87,7 +87,7 @@ class clientController {
       console.log("Erro ao deletar admin", error);
       return res.status(500).json({ error: "Erro interno no servidor "});
     }
-  }
+  } 
 }
 
 module.exports = new clientController();
