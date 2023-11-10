@@ -22,6 +22,15 @@ class cardapioController{
             return res.status(500).json({ error: "Erro interno no servidor "});
         }
     }
+    async listarCardapio(req, res) {
+        try {
+            const cardapio = await Cardapio.findAll();
+            return res.status(200).json({cardapio});
+        } catch (error) {
+            console.log('Erro ao encontrar o cardápio', error);
+            return res.status(500).json({ error: "Erro interno no servidor"});
+        }
+    }
 }
 
 module.exports = new cardapioController();

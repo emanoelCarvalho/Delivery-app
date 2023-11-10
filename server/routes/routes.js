@@ -15,4 +15,5 @@ router.delete( '/deleteAdmin/:id', clientController.deleteAdmin);
 //Cardápio
 
 router.post('/criarCardapio', cardapioController.criarCardapio);
+router.get('/listarCardapio', cardapioController.listarCardapio);
 module.exports = router;
