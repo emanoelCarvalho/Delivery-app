@@ -31,6 +31,30 @@ class cardapioController{
             return res.status(500).json({ error: "Erro interno no servidor"});
         }
     }
+
+    async updateCardapio(req, res) {
+        try {
+            const { id } = req.params;
+            const { dia } = req.body;
+
+            if (!dia) {
+                return res.status(400).json({error: "Preencha o campo para atualizar"})
+            }
+
+            await Cardapio.update({
+                dia,
+            }, {
+                where: { id : id}, 
+            });
+
+            const updatedCardapio = await Cardapio.findByPk(id);
+            
+            return res.status(200).json({ message: "Cardápio atualizado com sucesso", updatedCardapio});
+        } catch (error) {
+            console.log("Erro ao atualizar cliente: ", error);
+            return res.status(500).json({error: "Erro interno no servidor "});
+        }
+    }
 }
 
 module.exports = new cardapioController();
