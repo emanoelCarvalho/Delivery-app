@@ -4,14 +4,14 @@ const Cardapio = require("../models/cardapio");
 class cardapioController {
   async criarCardapio(req, res) {
     try {
-      const { dia } = req.body;
+      const { day } = req.body;
 
-      if (!dia) {
-        return res.status(400).json({ error: "Preencha o dia" });
+      if (!day) {
+        return res.status(400).json({ error: "Preencha o day" });
       }
 
       const novoCardapio = await Cardapio.create({
-        dia,
+        day,
       });
 
       return res.status(201).json({
@@ -36,9 +36,9 @@ class cardapioController {
   async updateCardapio(req, res) {
     try {
       const { id } = req.params;
-      const { dia } = req.body;
+      const { day } = req.body;
 
-      if (!dia) {
+      if (!day) {
         return res
           .status(400)
           .json({ error: "Preencha o campo para atualizar" });
@@ -46,7 +46,7 @@ class cardapioController {
 
       await Cardapio.update(
         {
-          dia,
+          day,
         },
         {
           where: { id: id },

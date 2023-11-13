@@ -2,7 +2,7 @@ const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../database/connection");
 
 class Cardapio extends Model {
-  dia;
+  day;
 }
 
 Cardapio.init(
@@ -12,7 +12,7 @@ Cardapio.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    dia: {
+    day: {
       type: DataTypes.STRING,
       allowNull: false,
     },
