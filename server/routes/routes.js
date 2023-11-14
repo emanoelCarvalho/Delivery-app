@@ -12,7 +12,7 @@ router.post('/novoAdmin', AdminController.criarAdmin);
 router.get('/listarAdmin', AdminController.listarAdmins);
 router.patch('/updateAdmin/:id', AdminController.atualizarAdmin);
 router.delete( '/deleteAdmin/:id', AdminController.deletarAdmin);
-router.post('/login', AdminController.loginAdmin);
+router.post('/admin/login', AdminController.logiAdmin);
 
 //Cardápio
 

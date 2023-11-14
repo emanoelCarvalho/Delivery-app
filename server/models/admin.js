@@ -2,13 +2,7 @@ const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../database/connection");
 const bcrypt = require("bcrypt");
 
-class Admin extends Model {
-  name;
-  phoneNumber;
-  address;
-  email;
-  password;
-}
+class Admin extends Model {}
 
 Admin.init(
   {
@@ -35,13 +29,20 @@ Admin.init(
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
   },
   {
     sequelize,
     modelName: "Admin",
     freezeTableName: true,
+    // hooks: {
+    //   beforeCreate: async (admin) => {
+    //     // Hash the password before saving to the database
+    //     const saltRounds = 10;
+    //     admin.password = await bcrypt.hash(admin.password, saltRounds);
+    //   },
+    // },
   }
 );
 

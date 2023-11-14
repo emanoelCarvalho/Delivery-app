@@ -1,6 +1,6 @@
 const Admin = require("../models/admin");
 const bcrypt = require("bcrypt");
-
+const jwt = require('jsonwebtoken');
 class AdminController {
   async criarAdmin(req, res) {
     try {
@@ -96,40 +96,32 @@ class AdminController {
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
-  
-  async loginAdmin(req, res) {
+  async logiAdmin(req, res) {
     try {
       const { email, password } = req.body;
 
-      // Encontrar o admin pelo email
       const admin = await Admin.findOne({ where: { email } });
-
-      // Verificar se o admin existe
+      // console.log(admin);
+      
       if (!admin) {
-        return res.status(404).json({
-          message: "Admin não encontrado",
-        });
+        return res.status(404).json({ message: "Admin não encontrado " });
       }
 
-      // Verificar a correspondência da senha
       const passwordMatch = await bcrypt.compare(password, admin.password);
-
+      
       if (!passwordMatch) {
-        return res.status(401).json({
-          message: "Credenciais inválidas",
-        });
+        return res.status(401).json({ message: "Password invalid" });
       }
 
-      // Aqui, você pode gerar um token de autenticação e enviá-lo no corpo da resposta
-      // ou configurar uma sessão de usuário, dependendo da sua estratégia de autenticação.
-
-      res.status(200).json({ admin });
+      const token = jwt.sign({ adminId: admin.id }, "secreto", { expiresIn: "1h"});
+      
+      res.status(200).json({ token, admin});
+      return admin;
     } catch (error) {
-      console.error("Erro ao autenticar admin: ", error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      console.log("Erro ao autenticar usuário", error);
+      return res.status(500).json({ error: "Erro interno no servidor "})
     }
   }
-
 }
 
 module.exports = new AdminController();
