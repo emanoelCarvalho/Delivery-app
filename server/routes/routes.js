@@ -2,16 +2,17 @@ const connection = require('../database/connection');
 const express = require('express');
 const router = express.Router();
 
-const clientController = require('../controllers/admin');
+const AdminController = require('../controllers/admin');
 const cardapioController = require('../controllers/cardapio');
 const pedidoController = require('../controllers/pedido');
 
 //Admin
 
-router.post('/novoAdmin', clientController.novoCliente);
-router.get('/listarAdmin', clientController.listarClientes);
-router.patch('/updateAdmin/:id', clientController.updateAdmin);
-router.delete( '/deleteAdmin/:id', clientController.deleteAdmin);
+router.post('/novoAdmin', AdminController.criarAdmin);
+router.get('/listarAdmin', AdminController.listarAdmins);
+router.patch('/updateAdmin/:id', AdminController.atualizarAdmin);
+router.delete( '/deleteAdmin/:id', AdminController.deletarAdmin);
+router.post('/login', AdminController.loginAdmin);
 
 //Cardápio
 
@@ -22,6 +23,6 @@ router.delete('/deleteCardapio/:id', cardapioController.deleteCardapio);
 
 //Pedido
 
-router.post('/criarPedido', pedidoController.criarPedido);
+// router.post('/criarPedido', pedidoController.criarPedido);
 
 module.exports = router;
