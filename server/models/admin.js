@@ -17,6 +17,7 @@ Admin.init(
     },
     phoneNumber: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
     },
     address: {
@@ -25,6 +26,7 @@ Admin.init(
     },
     email: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
     },
     password: {
