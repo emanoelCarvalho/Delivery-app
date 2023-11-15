@@ -2,7 +2,7 @@ const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../database/connection");
 
 class Cardapio extends Model {
-  day;
+  // day;
 }
 
 Cardapio.init(
@@ -24,10 +24,10 @@ Cardapio.init(
   }
 );
 
-Cardapio.sync({
-  force: true,
-}).then(() => {
-  console.log("A tabela Cardapio foi criada");
-});
+// Cardapio.sync({
+//   force: true,
+// }).then(() => {
+//   console.log("A tabela Cardapio foi criada");
+// });
 
 module.exports = Cardapio;

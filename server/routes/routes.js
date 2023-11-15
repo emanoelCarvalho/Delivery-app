@@ -4,6 +4,7 @@ const router = express.Router();
 
 const AdminController = require('../controllers/admin');
 const cardapioController = require('../controllers/cardapio');
+const PedidoController = require('../controllers/pedido');
 
 //Admin
 
@@ -21,6 +22,7 @@ router.patch('/updateCardapio/:id',cardapioController.updateCardapio);
 router.delete('/deleteCardapio/:id', cardapioController.deleteCardapio);
 
 //Pedido
-
+router.post('/CriarPedido', PedidoController.createPedido);
+router.get('/listarPedidos/:id', PedidoController.getPedidoById);
 
 module.exports = router;
