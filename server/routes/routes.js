@@ -34,5 +34,6 @@ router.delete("/deletePedido/:id", PedidoController.deletePedido);
 router.post("/createItem", ItemController.createItem);
 router.get("/getItems", ItemController.getItems);
 router.get("/getItem/:id", ItemController.getItemById);
+router.patch("/updateItem/:id", ItemController.updateItem);
 
 module.exports = router;
