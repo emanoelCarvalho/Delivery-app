@@ -1,32 +1,36 @@
-const connection = require('../database/connection');
-const express = require('express');
+const connection = require("../database/connection");
+const express = require("express");
 const router = express.Router();
 
-const AdminController = require('../controllers/admin');
-const cardapioController = require('../controllers/cardapio');
-const PedidoController = require('../controllers/pedido');
+const AdminController = require("../controllers/admin");
+const cardapioController = require("../controllers/cardapio");
+const PedidoController = require("../controllers/pedido");
+const ItemController = require("../controllers/item");
 
 //Admin
 
-router.post('/novoAdmin', AdminController.criarAdmin);
-router.get('/listarAdmin', AdminController.listarAdmins);
-router.patch('/updateAdmin/:id', AdminController.atualizarAdmin);
-router.delete( '/deleteAdmin/:id', AdminController.deletarAdmin);
-router.post('/admin/login', AdminController.logiAdmin);
+router.post("/novoAdmin", AdminController.criarAdmin);
+router.get("/listarAdmin", AdminController.listarAdmins);
+router.patch("/updateAdmin/:id", AdminController.atualizarAdmin);
+router.delete("/deleteAdmin/:id", AdminController.deletarAdmin);
+router.post("/admin/login", AdminController.logiAdmin);
 
 //Cardápio
 
-router.post('/criarCardapio', cardapioController.criarCardapio);
-router.get('/listarCardapio', cardapioController.listarCardapio);
-router.patch('/updateCardapio/:id',cardapioController.updateCardapio);
-router.delete('/deleteCardapio/:id', cardapioController.deleteCardapio);
+router.post("/criarCardapio", cardapioController.criarCardapio);
+router.get("/listarCardapio", cardapioController.listarCardapio);
+router.patch("/updateCardapio/:id", cardapioController.updateCardapio);
+router.delete("/deleteCardapio/:id", cardapioController.deleteCardapio);
 
 //Pedido
-router.post('/CriarPedido', PedidoController.createPedido);
-router.get('/listarPedidos', PedidoController.getPedidos);
-router.get('/listarPedido/:id', PedidoController.getPedidoById);
-router.patch('/updatePedido/:id', PedidoController.updatePedido);
-router.delete('/deletePedido/:id', PedidoController.deletePedido);
+router.post("/criarPedido", PedidoController.createPedido);
+router.get("/listarPedidos", PedidoController.getPedidos);
+router.get("/listarPedido/:id", PedidoController.getPedidoById);
+router.patch("/updatePedido/:id", PedidoController.updatePedido);
+router.delete("/deletePedido/:id", PedidoController.deletePedido);
 
+//Item
+
+router.post("/createItem", ItemController.createItem);
 
 module.exports = router;
