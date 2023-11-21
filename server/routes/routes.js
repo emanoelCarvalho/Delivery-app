@@ -25,5 +25,7 @@ router.delete('/deleteCardapio/:id', cardapioController.deleteCardapio);
 router.post('/CriarPedido', PedidoController.createPedido);
 router.get('/listarPedidos', PedidoController.getPedidos);
 router.get('/listarPedido/:id', PedidoController.getPedidoById);
+router.patch('/updatePedido/:id', PedidoController.updatePedido);
+
 
 module.exports = router;

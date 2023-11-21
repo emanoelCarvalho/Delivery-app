@@ -49,11 +49,11 @@ class PedidoController {
     try {
       const pedido = await Pedido.findByPk(req.params.id);
       if (pedido) {
-        const { description, adminId, cardapioId } = req.body;
+        const { description, AdminId, CardapioId } = req.body;
         await pedido.update({
           description,
-          adminId,
-          cardapioId,
+          AdminId,
+          CardapioId,
         });
         res.json(pedido);
       } else {
