@@ -83,6 +83,29 @@ class ItemController {
       return res.status(500).json({ error: "Erro interno no servidor " });
     }
   }
+
+  async deleteItem(req, res) {
+    try {
+      const { id } = req.params;
+
+      const deletedItem = await Item.findByPk(id);
+
+      if (!deletedItem) {
+        return res.status(404).json({ message: "Item não encontrado" });
+      }
+
+      await Item.destroy({
+        where: { id: id },
+      });
+
+      return res
+        .status(200)
+        .json({ message: "Item deletado com sucesso ", deletedItem });
+    } catch (error) {
+      console.log("Erro ao deletar item: ", error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
+    }
+  }
 }
 
 module.exports = new ItemController();
