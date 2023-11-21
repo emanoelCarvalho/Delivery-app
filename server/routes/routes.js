@@ -32,5 +32,7 @@ router.delete("/deletePedido/:id", PedidoController.deletePedido);
 //Item
 
 router.post("/createItem", ItemController.createItem);
+router.get("/getItems", ItemController.getItems);
+router.get("/getItem/:id", ItemController.getItemById);
 
 module.exports = router;
