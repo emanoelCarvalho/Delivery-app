@@ -23,6 +23,6 @@ router.delete('/deleteCardapio/:id', cardapioController.deleteCardapio);
 
 //Pedido
 router.post('/CriarPedido', PedidoController.createPedido);
-router.get('/listarPedidos/:id', PedidoController.getPedidoById);
+router.get('/listarPedidos', PedidoController.getPedidos);
 
 module.exports = router;

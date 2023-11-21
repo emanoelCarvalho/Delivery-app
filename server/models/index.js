@@ -4,27 +4,35 @@ const Pedido = require("./pedido");
 const sequelize = require("../database/connection");
 
 try {
-  Pedido.belongsTo(Admin, { foreignKey: "adminId", onDelete:"cascade" });
-  Admin.hasMany(Pedido, { foreignKey: "adminId", onDelete: "cascade" });
+  //Pedido
 
- Pedido.belongsTo(Cardapio, { foreignKey: 'cardapioId', onDelete: "cascade" });
-  Cardapio.hasMany(Pedido, { foreignKey: "cardapioId", onDelete: "cascade" });
+  Pedido.belongsTo(Admin, {  });
+  Pedido.belongsTo(Cardapio, {  });
+
+  //Admin
+
+  Admin.hasMany(Pedido, {  });
+
+  //Cardapio
+
+  Cardapio.hasMany(Pedido, {  });
 
   console.log("Relacionamentos definidos com sucesso");
 } catch (error) {
-    console.log("Erro ao definir relacionamentos");
-    console.log(error);
+  console.log("Erro ao definir relacionamentos");
+  console.log(error);
 }
 
-sequelize.sync({ force: true })
-    .then(() => console.log("Sincronizados com sucesso"))
-    .catch(error => {
-        console.log("Erro ao sincronizar banco de dados");
-        console.log(error.message)
-    })
+sequelize
+  .sync({ force: true })
+  .then(() => console.log("Sincronizados com sucesso"))
+  .catch((error) => {
+    console.log("Erro ao sincronizar banco de dados");
+    console.log(error.message);
+  });
 
-    module.exports = {
-        Admin, 
-        Cardapio, 
-        Pedido
-    }
+module.exports = {
+  Admin,
+  Cardapio,
+  Pedido,
+};

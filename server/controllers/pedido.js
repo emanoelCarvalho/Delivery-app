@@ -1,14 +1,12 @@
-const { Router } = require('express');
-const { Pedido } = require('../models');
-const { Admin } = require('../models');
-const { Cardapio } = require('../models');
-class PedidoController {
+const { Pedido, Admin, Cardapio } = require('../models');
 
+class PedidoController {
   async getPedidos(req, res) {
     try {
       const pedidos = await Pedido.findAll({
-        include: [Admin, Cardapio], // Inclui os dados relacionados do Admin e do Cardapio
+        include: [Admin, Cardapio],
       });
+      console.log(pedidos);
       res.json(pedidos);
     } catch (error) {
       console.error(error);
@@ -18,12 +16,12 @@ class PedidoController {
 
   async createPedido(req, res) {
     try {
+      const { description, AdminId, CardapioId } = req.body;
       const novoPedido = await Pedido.create({
-        description: req.body.description,
-        adminId: req.body.adminId,
-        cardapioId: req.body.cardapioId,
+        description,
+        AdminId,
+        CardapioId,
       });
-      console.log(novoPedido.adminId)
       res.status(201).json(novoPedido);
     } catch (error) {
       console.error(error);
@@ -34,7 +32,7 @@ class PedidoController {
   async getPedidoById(req, res) {
     try {
       const pedido = await Pedido.findByPk(req.params.id, {
-        include: [Admin, Cardapio], // Inclui os dados relacionados do Admin e do Cardapio
+        include: [Admin, Cardapio],
       });
       if (pedido) {
         res.json(pedido);
@@ -51,10 +49,11 @@ class PedidoController {
     try {
       const pedido = await Pedido.findByPk(req.params.id);
       if (pedido) {
+        const { description, adminId, cardapioId } = req.body;
         await pedido.update({
-          description: req.body.description,
-          adminId: req.body.adminId,
-          cardapioId: req.body.cardapioId,
+          description,
+          adminId,
+          cardapioId,
         });
         res.json(pedido);
       } else {
