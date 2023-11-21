@@ -22,7 +22,7 @@ class ItemController {
         content: newItem.dataValues,
       });
     } catch (error) {
-      console.log("Erro ao criar item: " , error.message);
+      console.log("Erro ao criar item: " , err);
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
