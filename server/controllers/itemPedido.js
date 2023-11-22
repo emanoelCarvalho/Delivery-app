@@ -76,6 +76,22 @@ class ItemPedidoController {
       res.status(500).json({ error: "Erro ao atualizar item pedido" });
     }
   }
+
+  async deleteItemPedido(req, res) {
+    try {
+      const itemPedido = await ItemPedido.findByPk(req.params.id);
+
+      if (itemPedido) {
+        await itemPedido.destroy();
+        res.json({ message: "Item pedido excluído com sucesso " });
+      } else {
+        res.status(404).json({ error: "Item pedido não encontrado" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro ao excluir o pedido" });
+    }
+  }
 }
 
 module.exports = new ItemPedidoController();
