@@ -6,7 +6,6 @@ class PedidoController {
       const pedidos = await Pedido.findAll({
         include: [Admin, Cardapio],
       });
-      console.log(pedidos);
       res.json(pedidos);
     } catch (error) {
       console.error(error);
@@ -17,6 +16,10 @@ class PedidoController {
   async createPedido(req, res) {
     try {
       const { description, AdminId, CardapioId } = req.body;
+
+      if (!description || !AdminId || !CardapioId) {
+        return res.status(400).json({ error: "Preencha todos os campos do pedido" });
+      }
       const novoPedido = await Pedido.create({
         description,
         AdminId,
@@ -48,6 +51,11 @@ class PedidoController {
   async updatePedido(req, res) {
     try {
       const pedido = await Pedido.findByPk(req.params.id);
+
+      if (!description || !AdminId || !CardapioId) {
+        return res.status(400).json({ error: "Preencha todos os campos do pedido" });
+      }
+      
       if (pedido) {
         const { description, AdminId, CardapioId } = req.body;
         await pedido.update({

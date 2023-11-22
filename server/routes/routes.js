@@ -6,6 +6,7 @@ const AdminController = require("../controllers/admin");
 const cardapioController = require("../controllers/cardapio");
 const PedidoController = require("../controllers/pedido");
 const ItemController = require("../controllers/item");
+const ItemPedidoController = require('../controllers/itemPedido');
 
 //Admin
 
@@ -36,5 +37,11 @@ router.get("/getItems", ItemController.getItems);
 router.get("/getItem/:id", ItemController.getItemById);
 router.patch("/updateItem/:id", ItemController.updateItem);
 router.delete("/deleteItem/:id", ItemController.deleteItem);
+
+//ItemPedido 
+
+router.post('/createItemPedido', ItemPedidoController.createItemPedido);
+router.get('/getItemsPedidos', ItemPedidoController.getItemPedido);
+router.get('/getItemPedido/:id', ItemPedidoController.getItemPedidoById);
 
 module.exports = router;
