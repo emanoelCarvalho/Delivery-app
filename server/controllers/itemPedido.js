@@ -1,4 +1,5 @@
 const { ItemPedido, Pedido } = require("../models");
+const { findByPk } = require("../models/admin");
 
 class ItemPedidoController {
   async getItemPedido(req, res) {
@@ -44,6 +45,35 @@ class ItemPedidoController {
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Erro ao criar um novo pedido" });
+    }
+  }
+
+  async updateItemPedido(req, res) {
+    try {
+      const updateItemPedido = await ItemPedido.findByPk(req.params.id);
+
+      if (!updateItemPedido) {
+        return res.status(404).json({ error: "Item pedido não encontrado" });
+      }
+
+      const { amount, price, PedidoId } = req.body;
+
+      if (!amount || !price || !PedidoId) {
+        return res.status(400).json({
+          erro: "Preencha todos os campos para atualizar o item pedido",
+        });
+      }
+
+      await updateItemPedido.update({
+        amount,
+        price,
+        PedidoId,
+      });
+
+      res.json(updateItemPedido);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro ao atualizar item pedido" });
     }
   }
 }

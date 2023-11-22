@@ -1,4 +1,4 @@
-const { Pedido, Admin, Cardapio } = require('../models');
+const { Pedido, Admin, Cardapio } = require("../models");
 
 class PedidoController {
   async getPedidos(req, res) {
@@ -9,7 +9,7 @@ class PedidoController {
       res.json(pedidos);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Erro ao obter os pedidos' });
+      res.status(500).json({ error: "Erro ao obter os pedidos" });
     }
   }
 
@@ -18,7 +18,9 @@ class PedidoController {
       const { description, AdminId, CardapioId } = req.body;
 
       if (!description || !AdminId || !CardapioId) {
-        return res.status(400).json({ error: "Preencha todos os campos do pedido" });
+        return res
+          .status(400)
+          .json({ error: "Preencha todos os campos do pedido" });
       }
       const novoPedido = await Pedido.create({
         description,
@@ -28,7 +30,7 @@ class PedidoController {
       res.status(201).json(novoPedido);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Erro ao criar um novo pedido' });
+      res.status(500).json({ error: "Erro ao criar um novo pedido" });
     }
   }
 
@@ -40,11 +42,11 @@ class PedidoController {
       if (pedido) {
         res.json(pedido);
       } else {
-        res.status(404).json({ error: 'Pedido não encontrado' });
+        res.status(404).json({ error: "Pedido não encontrado" });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Erro ao obter o pedido' });
+      res.status(500).json({ error: "Erro ao obter o pedido" });
     }
   }
 
@@ -52,24 +54,28 @@ class PedidoController {
     try {
       const pedido = await Pedido.findByPk(req.params.id);
 
+      if (!pedido) {
+        return res.status(404).json({ error: "Pedido não encontrado" });
+      }
+
+      const { description, AdminId, CardapioId } = req.body;
+
       if (!description || !AdminId || !CardapioId) {
-        return res.status(400).json({ error: "Preencha todos os campos do pedido" });
+        return res
+          .status(400)
+          .json({ error: "Preencha todos os campos do pedido" });
       }
-      
-      if (pedido) {
-        const { description, AdminId, CardapioId } = req.body;
-        await pedido.update({
-          description,
-          AdminId,
-          CardapioId,
-        });
-        res.json(pedido);
-      } else {
-        res.status(404).json({ error: 'Pedido não encontrado' });
-      }
+
+      await pedido.update({
+        description,
+        AdminId,
+        CardapioId,
+      });
+
+      res.json(pedido);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Erro ao atualizar o pedido' });
+      res.status(500).json({ error: "Erro ao atualizar o pedido" });
     }
   }
 
@@ -78,13 +84,13 @@ class PedidoController {
       const pedido = await Pedido.findByPk(req.params.id);
       if (pedido) {
         await pedido.destroy();
-        res.json({ message: 'Pedido excluído com sucesso' });
+        res.json({ message: "Pedido excluído com sucesso" });
       } else {
-        res.status(404).json({ error: 'Pedido não encontrado' });
+        res.status(404).json({ error: "Pedido não encontrado" });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Erro ao excluir o pedido' });
+      res.status(500).json({ error: "Erro ao excluir o pedido" });
     }
   }
 }
