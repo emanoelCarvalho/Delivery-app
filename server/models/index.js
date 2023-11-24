@@ -1,7 +1,10 @@
 const Admin = require("./admin");
 const Cardapio = require("./cardapio");
 const Pedido = require("./pedido");
+const Item = require("./item");
 const ItemPedido = require("./itemPedido");
+const ItemHasCardapio = require("./itemHasCardapio");
+
 const sequelize = require("../database/connection");
 
 try {
@@ -9,7 +12,7 @@ try {
 
   Pedido.belongsTo(Admin, {});
   Pedido.belongsTo(Cardapio, {});
-  Pedido.hasMany(ItemPedido, {})
+  Pedido.hasMany(ItemPedido, {});
   //Admin
 
   Admin.hasMany(Pedido, {});
@@ -17,12 +20,21 @@ try {
   //Cardapio
 
   Cardapio.hasMany(Pedido, {});
+  Cardapio.belongsToMany(Item, {
+    through: ItemHasCardapio,
+    onDelete: "cascade",
+  });
 
   //ItemPedido
 
   ItemPedido.belongsTo(Pedido, {});
 
+  //Item
 
+  Item.belongsToMany(Cardapio, {
+    through: ItemHasCardapio,
+    onDelete: "cascade",
+  });
 
   console.log("Relacionamentos definidos com sucesso");
 } catch (error) {
@@ -42,5 +54,5 @@ module.exports = {
   Admin,
   Cardapio,
   Pedido,
-  ItemPedido
+  ItemPedido,
 };
