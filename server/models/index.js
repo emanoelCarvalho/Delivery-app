@@ -4,6 +4,7 @@ const Pedido = require("./pedido");
 const Item = require("./item");
 const ItemPedido = require("./itemPedido");
 const ItemHasCardapio = require("./itemHasCardapio");
+const ItemPedidoHasItem = require("./itemPedidoHasItem");
 
 const sequelize = require("../database/connection");
 
@@ -11,8 +12,11 @@ try {
   //Pedido
 
   Pedido.belongsTo(Admin, {});
+
   Pedido.belongsTo(Cardapio, {});
+
   Pedido.hasMany(ItemPedido, {});
+
   //Admin
 
   Admin.hasMany(Pedido, {});
@@ -20,6 +24,7 @@ try {
   //Cardapio
 
   Cardapio.hasMany(Pedido, {});
+
   Cardapio.belongsToMany(Item, {
     through: ItemHasCardapio,
     onDelete: "cascade",
@@ -29,10 +34,19 @@ try {
 
   ItemPedido.belongsTo(Pedido, {});
 
+  ItemPedido.belongsToMany(Item, {
+    through: ItemPedidoHasItem,
+    onDelete: "cascade",
+  });
+
   //Item
 
   Item.belongsToMany(Cardapio, {
     through: ItemHasCardapio,
+    onDelete: "cascade",
+  });
+  Item.belongsToMany(ItemPedido, {
+    through: ItemPedidoHasItem,
     onDelete: "cascade",
   });
 
