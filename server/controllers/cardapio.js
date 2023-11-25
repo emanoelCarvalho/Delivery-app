@@ -33,6 +33,22 @@ class cardapioController {
     }
   }
 
+  async getCardapioById(req, res) {
+    try {
+      const cardapio = await Cardapio.findByPk(req.params.id);
+
+      if (cardapio) {
+        return res.status(200).json({ cardapio });
+      } else {
+        return res.status(404).json({ error: "Cardápio, não encontrado " })
+      }
+    } catch (error) {
+      console.log("Erro ao buscar o cardápio, verifique o ID: ", error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
+   
+    }
+  }
+
   async updateCardapio(req, res) {
     try {
       const { id } = req.params;

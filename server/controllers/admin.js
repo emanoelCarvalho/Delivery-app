@@ -37,6 +37,22 @@ class AdminController {
     }
   }
 
+  async getAdminById(req, res) {
+    try {
+      const admin = await Admin.findByPk(req.params.id);
+
+      if (admin) {
+        return res.status(200).json({ admin });
+      } else {
+        return res.status(404).json({ error: "Admin, não encontrado " })
+      }
+    } catch (error) {
+      console.log("Erro ao buscar o admin, verifique o ID: ", error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
+   
+    }
+  }
+
   async updateAdmin(req, res) {
     try {
       const { id } = req.params;
