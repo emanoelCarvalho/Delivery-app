@@ -2,7 +2,7 @@ const { where } = require("sequelize");
 const Cardapio = require("../models/cardapio");
 
 class cardapioController {
-  async criarCardapio(req, res) {
+  async createCardapio(req, res) {
     try {
       const { day } = req.body;
 
@@ -23,7 +23,7 @@ class cardapioController {
     }
   }
 
-  async listarCardapio(req, res) {
+  async getCardapios(req, res) {
     try {
       const cardapio = await Cardapio.findAll();
       return res.status(200).json({ cardapio });

@@ -2,7 +2,7 @@ const Admin = require("../models/admin");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 class AdminController {
-  async criarAdmin(req, res) {
+  async createAdmin(req, res) {
     try {
       const { name, phoneNumber, address, email, password } = req.body;
 
@@ -27,7 +27,7 @@ class AdminController {
     }
   }
 
-  async listarAdmins(req, res) {
+  async getAdmins(req, res) {
     try {
       const admins = await Admin.findAll();
       return res.status(200).json(admins);
@@ -37,7 +37,7 @@ class AdminController {
     }
   }
 
-  async atualizarAdmin(req, res) {
+  async updateAdmin(req, res) {
     try {
       const { id } = req.params;
       const { name, phoneNumber, address, email, password } = req.body;
@@ -73,7 +73,7 @@ class AdminController {
     }
   }
 
-  async deletarAdmin(req, res) {
+  async deleteAdmin(req, res) {
     try {
       const { id } = req.params;
 
@@ -96,7 +96,7 @@ class AdminController {
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
-  async logiAdmin(req, res) {
+  async loginAdmin(req, res) {
     try {
       const { email, password } = req.body;
 
