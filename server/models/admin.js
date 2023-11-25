@@ -32,6 +32,26 @@ Admin.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    cnpj: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    confirmPassword: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    bank: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    agency: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    account: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -39,11 +59,5 @@ Admin.init(
     freezeTableName: true,
   }
 );
-
-// Admin.sync({
-//   force: true,
-// }).then(() => {
-//   console.log("A tabela admin foi criada");
-// });
 
 module.exports = Admin;

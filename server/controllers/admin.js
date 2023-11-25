@@ -1,13 +1,42 @@
 const Admin = require("../models/admin");
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET || "secreto";
+
 class AdminController {
   async createAdmin(req, res) {
     try {
-      const { name, phoneNumber, address, email, password } = req.body;
-
-      if (!name || !phoneNumber || !address || !email || !password) {
+      const {
+        name,
+        phoneNumber,
+        address,
+        email,
+        password,
+        confirmPassword,
+        cnpj,
+        bank,
+        agency,
+        account,
+      } = req.body;
+  
+      if (
+        !name ||
+        !phoneNumber ||
+        !address ||
+        !email ||
+        !password ||
+        !confirmPassword ||  // Certifique-se de usar o nome correto aqui
+        !cnpj ||
+        !bank ||
+        !agency ||
+        !account
+      ) {
         return res.status(400).json({ error: "Preencha todos os campos" });
+      }
+  
+  if (password !== confirmPassword) {
+        return res.status(400).json({ error: "As senhas não coincidem" });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -18,6 +47,11 @@ class AdminController {
         address,
         email,
         password: hashedPassword,
+        confirmPassword: hashedPassword, 
+        cnpj,
+        bank,
+        agency,
+        account,
       });
 
       return res.status(201).json({ content: novoAdmin.dataValues });
@@ -44,22 +78,47 @@ class AdminController {
       if (admin) {
         return res.status(200).json({ admin });
       } else {
-        return res.status(404).json({ error: "Admin, não encontrado " })
+        return res.status(404).json({ error: "Admin não encontrado" });
       }
     } catch (error) {
       console.log("Erro ao buscar o admin, verifique o ID: ", error);
       return res.status(500).json({ error: "Erro interno no servidor" });
-   
     }
   }
 
   async updateAdmin(req, res) {
     try {
       const { id } = req.params;
-      const { name, phoneNumber, address, email, password } = req.body;
+      const {
+        name,
+        phoneNumber,
+        address,
+        email,
+        password,
+        cnpj,
+        confirmPassword,
+        bank,
+        agency,
+        account,
+      } = req.body;
 
-      if (!name || !phoneNumber || !address || !email || !password) {
+      if (
+        !name ||
+        !phoneNumber ||
+        !address ||
+        !email ||
+        !password ||
+        !cnpj ||
+        !confirmPassword ||
+        !bank ||
+        !agency ||
+        !account
+      ) {
         return res.status(400).json({ error: "Preencha todos os campos" });
+      }
+
+      if (password !== confirmPassword) {
+        return res.status(400).json({ error: "As senhas não coincidem" });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -71,6 +130,11 @@ class AdminController {
           address,
           email,
           password: hashedPassword,
+          confirmPassword: hashedPassword,
+          cnpj,
+          bank,
+          agency,
+          account,
         },
         {
           where: { id },
@@ -112,30 +176,36 @@ class AdminController {
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
+
   async loginAdmin(req, res) {
     try {
       const { email, password } = req.body;
 
       const admin = await Admin.findOne({ where: { email } });
-      // console.log(admin);
-      
+
       if (!admin) {
-        return res.status(404).json({ message: "Admin não encontrado " });
+        return res.status(404).json({ message: "Admin não encontrado" });
       }
 
       const passwordMatch = await bcrypt.compare(password, admin.password);
-      
+
       if (!passwordMatch) {
-        return res.status(401).json({ message: "Password invalid" });
+        return res.status(401).json({ message: "Credenciais inválidas" });
       }
 
-      const token = jwt.sign({ adminId: admin.id }, "secreto", { expiresIn: "1h"});
-      
-      res.status(200).json({ token, admin});
-      return admin;
+      const token = jwt.sign({ adminId: admin.id }, JWT_SECRET, {
+        expiresIn: "1h",
+      });
+
+      return res
+        .status(200)
+        .json({
+          token,
+          admin: { id: admin.id, name: admin.name, email: admin.email },
+        });
     } catch (error) {
-      console.log("Erro ao autenticar usuário", error);
-      return res.status(500).json({ error: "Erro interno no servidor "})
+      console.error("Erro ao autenticar usuário", error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
 }
