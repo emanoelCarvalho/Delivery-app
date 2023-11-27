@@ -1,28 +1,32 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <Cadastro />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Cadastro from './components/Cadastro.vue';
+
 
 export default {
   name: 'App',
+  data() {
+    return {
+
+    };
+  },
   components: {
-    HelloWorld
-  }
+    Cadastro,
+}
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+  }
 </style>
