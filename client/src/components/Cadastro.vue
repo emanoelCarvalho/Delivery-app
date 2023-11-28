@@ -2,47 +2,57 @@
   <div class="container">
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" id="email" v-model="user.email" required>
+      <input type="email" id="email" v-model="admin.email" required />
     </div>
 
     <div class="form-group">
       <label for="password">Senha:</label>
-      <input type="password" id="password" v-model="user.password" required>
+      <input type="password" id="password" v-model="admin.password" required />
     </div>
 
     <div class="form-group">
       <label for="nomeFantasia">Nome fantasia:</label>
-      <input type="text" id="nomeFantasia" v-model="user.nomeFantasia" required>
+      <input
+        type="text"
+        id="nomeFantasia"
+        v-model="admin.name"
+        required
+      />
     </div>
 
     <div class="form-group">
       <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" v-model="user.telefone" required>
+      <input type="tel" id="telefone" v-model="admin.phoneNumber" required />
     </div>
 
     <div class="form-group">
       <label for="cnpjCpf">CNPJ/CPF:</label>
-      <input type="text" id="cnpjCpf" v-model="user.cnpjCpf" required>
+      <input type="text" id="cnpjCpf" v-model="admin.cnpj" required />
     </div>
 
     <div class="form-group">
       <label for="conta">Conta:</label>
-      <input type="text" id="conta" v-model="user.conta" required>
+      <input type="text" id="conta" v-model="admin.account" required />
     </div>
 
     <div class="form-group">
       <label for="agencia">Agência:</label>
-      <input type="text" id="agencia" v-model="user.agencia" required>
+      <input type="text" id="agencia" v-model="admin.agency" required />
     </div>
 
     <div class="form-group">
       <label for="banco">Banco:</label>
-      <input type="text" id="banco" v-model="user.banco" required>
+      <input type="text" id="banco" v-model="admin.bank" required />
     </div>
 
     <div class="form-group">
       <label for="confirmeASenha">Confirme a senha:</label>
-      <input type="password" id="confirmeASenha" v-model="user.confirmeASenha" required>
+      <input
+        type="password"
+        id="confirmeASenha"
+        v-model="admin.confirmPassword  "
+        required
+      />
     </div>
 
     <div class="form-group">
@@ -52,49 +62,62 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      user: {
-        email: '',
-        password: '',
-        nomeFantasia: '',
-        telefone: '',
-        cnpjCpf: '',
-        conta: '',
-        agencia: '',
-        banco: '',
-        confirmeASenha: ''
-      }
-    }
+      admin: {
+        email: "",
+        password: "",
+        name: "",
+        phoneNumber: "",
+        cnpj: "",
+        account: "",
+        agency: "",
+        bank: "",
+        confirmPassword: "",
+      },
+    };
   },
 
   methods: {
     register() {
       // Validate the form data
-      if (this.user.email === '' || this.user.password === '' || this.user.nomeFantasia === '' || this.user.telefone === '' || this.user.cnpjCpf === '' || this.user.conta === '' || this.user.agencia === '' || this.user.banco === '' || this.user.confirmeASenha === '') {
-        alert('Preencha todos os campos obrigatórios');
+      if (
+        this.admin.email === "" ||
+        this.admin.password === "" ||
+        this.admin.name === "" ||
+        this.admin.phoneNumber === "" ||
+        this.admin.cnpj === "" ||
+        this.admin.account === "" ||
+        this.admin.agency === "" ||
+        this.admin.bank === "" ||
+        this.admin.confirmPassword === ""
+      ) {
+        alert("Preencha todos os campos obrigatórios");
         return;
       }
 
-      if (this.user.password !== this.user.confirmeASenha) {
-        alert('As senhas não coincidem');
+      if (this.admin.password !== this.admin.confirmPassword) {
+        alert("As senhas não coincidem");
         return;
       }
 
       // Submit the form data to the server
-      axios.post('/register', this.user)
-        .then(response => {
-          alert('Cadastro realizado com sucesso');
+      axios
+        .post("http://localhost:3000/admin/novoAdmin", this.admin)
+        .then((response) => {
+          alert("Cadastro realizado com sucesso");
           // Redirect to the login page
-          this.$router.push('/login');
+          this.$router.push("/");
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -123,7 +146,6 @@ input {
 button {
   padding: 10px 20px;
   border: none;
-  background-color: #007bff
+  background-color: #007bff;
 }
-
 </style>
