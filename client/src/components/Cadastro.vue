@@ -56,6 +56,11 @@
     </div>
 
     <div class="form-group">
+      <label for="address">Endereço:</label>
+      <input type="text" id="address" v-model="admin.address" required />
+    </div>
+
+    <div class="form-group">
       <button @click="register">Cadastrar</button>
     </div>
   </div>
@@ -77,6 +82,7 @@ export default {
         agency: "",
         bank: "",
         confirmPassword: "",
+        address: "",
       },
     };
   },
@@ -93,7 +99,8 @@ export default {
         this.admin.account === "" ||
         this.admin.agency === "" ||
         this.admin.bank === "" ||
-        this.admin.confirmPassword === ""
+        this.admin.confirmPassword === "" ||
+        this.admin.address === "" // Adicionando validação para o campo "address"
       ) {
         alert("Preencha todos os campos obrigatórios");
         return;
@@ -110,10 +117,10 @@ export default {
         .then((response) => {
           alert("Cadastro realizado com sucesso");
           // Redirect to the login page
-          this.$router.push("/");
+          this.$router.push("/LoginPage");
         })
         .catch((error) => {
-          console.error(error);
+          console.log(error);
         });
     },
   },
