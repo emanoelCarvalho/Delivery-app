@@ -1,12 +1,14 @@
 <template>
   <div>
 
+    <Login />
     <Cadastro />
   </div>
 </template>
 
 <script>
 import Cadastro from './components/Cadastro.vue';
+import Login from './components/Login.vue';
 
 
 export default {
@@ -17,6 +19,7 @@ export default {
     };
   },
   components: {
+    Login,
     Cadastro,
 }
 }
