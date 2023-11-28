@@ -88,40 +88,37 @@ export default {
   },
 
   methods: {
-    register() {
-      // Validate the form data
-      if (
-        this.admin.email === "" ||
-        this.admin.password === "" ||
-        this.admin.name === "" ||
-        this.admin.phoneNumber === "" ||
-        this.admin.cnpj === "" ||
-        this.admin.account === "" ||
-        this.admin.agency === "" ||
-        this.admin.bank === "" ||
-        this.admin.confirmPassword === "" ||
-        this.admin.address === "" // Adicionando validação para o campo "address"
-      ) {
-        alert("Preencha todos os campos obrigatórios");
-        return;
-      }
+    async register() {
+      try {
+        if (
+          this.admin.email === "" ||
+          this.admin.password === "" ||
+          this.admin.name === "" ||
+          this.admin.phoneNumber === "" ||
+          this.admin.cnpj === "" ||
+          this.admin.account === "" ||
+          this.admin.agency === "" ||
+          this.admin.bank === "" ||
+          this.admin.confirmPassword === "" ||
+          this.admin.address === ""
+        ) {
+          alert("Preencha todos os campos obrigatórios");
+          return;
+        }
 
-      if (this.admin.password !== this.admin.confirmPassword) {
-        alert("As senhas não coincidem");
-        return;
-      }
+        if (this.admin.password !== this.admin.confirmPassword) {
+          alert("As senhas não coincidem");
+          return;
+        }
 
-      // Submit the form data to the server
-      axios
-        .post("http://localhost:3000/admin/novoAdmin", this.admin)
-        .then((response) => {
-          alert("Cadastro realizado com sucesso");
-          // Redirect to the login page
-          this.$router.push("/LoginPage");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        const response = await axios.post("http://localhost:3000/admin/novoAdmin", this.admin);
+        
+        alert("Cadastro realizado com sucesso");
+        
+      } catch (error) {
+        console.log(error);
+        alert("Erro ao realizar o cadastro. Tente novamente mais tarde.");
+      }
     },
   },
 };
