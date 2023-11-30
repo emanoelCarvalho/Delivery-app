@@ -1,4 +1,5 @@
 const Admin = require("./admin");
+const User = require("./user");
 const Cardapio = require("./cardapio");
 const Pedido = require("./pedido");
 const Item = require("./item");
@@ -11,15 +12,15 @@ const sequelize = require("../database/connection");
 try {
   //Pedido
 
-  Pedido.belongsTo(Admin, {});
+  Pedido.belongsTo(User, {});
 
   Pedido.belongsTo(Cardapio, {});
 
   Pedido.hasMany(ItemPedido, {});
 
-  //Admin
+  //User
 
-  Admin.hasMany(Pedido, {});
+  User.hasMany(Pedido, {});
 
   //Cardapio
 
@@ -69,4 +70,5 @@ module.exports = {
   Cardapio,
   Pedido,
   ItemPedido,
+  User
 };

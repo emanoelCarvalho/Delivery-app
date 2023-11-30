@@ -1,10 +1,10 @@
-const { Pedido, Admin, Cardapio } = require("../models");
+const { Pedido, User, Cardapio } = require("../models");
 
 class PedidoController {
   async getPedidos(req, res) {
     try {
       const pedidos = await Pedido.findAll({
-        include: [Admin, Cardapio],
+        include: [User, Cardapio],
       });
       res.json(pedidos);
     } catch (error) {
@@ -15,16 +15,16 @@ class PedidoController {
 
   async createPedido(req, res) {
     try {
-      const { description, AdminId, CardapioId } = req.body;
+      const { description, UserId, CardapioId } = req.body;
 
-      if (!description || !AdminId || !CardapioId) {
+      if (!description || !UserId || !CardapioId) {
         return res
           .status(400)
           .json({ error: "Preencha todos os campos do pedido" });
       }
       const novoPedido = await Pedido.create({
         description,
-        AdminId,
+        UserId,
         CardapioId,
       });
       res.status(201).json(novoPedido);
@@ -37,7 +37,7 @@ class PedidoController {
   async getPedidoById(req, res) {
     try {
       const pedido = await Pedido.findByPk(req.params.id, {
-        include: [Admin, Cardapio],
+        include: [User, Cardapio],
       });
       if (pedido) {
         res.json(pedido);
@@ -58,9 +58,9 @@ class PedidoController {
         return res.status(404).json({ error: "Pedido não encontrado" });
       }
 
-      const { description, AdminId, CardapioId } = req.body;
+      const { description, UserId, CardapioId } = req.body;
 
-      if (!description || !AdminId || !CardapioId) {
+      if (!description || !UserId || !CardapioId) {
         return res
           .status(400)
           .json({ error: "Preencha todos os campos do pedido" });
@@ -68,7 +68,7 @@ class PedidoController {
 
       await pedido.update({
         description,
-        AdminId,
+        UserId,
         CardapioId,
       });
 
