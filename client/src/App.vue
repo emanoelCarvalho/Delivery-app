@@ -2,7 +2,10 @@
   <div>
 
     <Login />
-    <Cadastro />
+    <main>
+      <router-view></router-view>
+    </main>
+    <!-- <Cadastro /> -->
   </div>
 </template>
 
