@@ -13,7 +13,11 @@
     <div class="form-group">
       <button @click="login">Entrar</button>
     </div>
+    <div>
+      <a @click="alterRoute()">Não tem conta? Crie agora.</a>
+    </div>
   </div>
+  <RouterView />
 </template>
 
 <script>
@@ -55,6 +59,9 @@ export default {
         alert('Erro ao fazer login. Por favor, tente novamente mais tarde.');
       }
     },
+      alterRoute() {
+        this.$router.push({name: 'register'})
+      }
   },
 };
 </script>
@@ -86,5 +93,9 @@ button {
   padding: 10px 20px;
   border: none;
   background-color: #007bff;
+}
+
+a{
+  color: blue;
 }
 </style>

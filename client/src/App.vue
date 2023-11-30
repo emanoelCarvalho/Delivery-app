@@ -1,18 +1,10 @@
 <template>
   <div>
-
-    <Login />
-    <main>
-      <router-view></router-view>
-    </main>
-    <!-- <Cadastro /> -->
+    <RouterView />
   </div>
 </template>
 
 <script>
-import Cadastro from './components/Cadastro.vue';
-import Login from './components/Login.vue';
-
 
 export default {
   name: 'App',
@@ -21,10 +13,11 @@ export default {
 
     };
   },
-  components: {
-    Login,
-    Cadastro,
-}
+  methods: {
+    alterRoute() {
+      this.$router.push({name: 'register'})
+    }
+  }
 }
 </script>
 
