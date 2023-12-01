@@ -29,7 +29,8 @@ try {
   Cardapio.belongsToMany(Item, {
     through: ItemHasCardapio,
     onDelete: "cascade",
-  });
+  }); 
+  
 
   //ItemPedido
 
