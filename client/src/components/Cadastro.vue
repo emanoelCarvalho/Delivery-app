@@ -114,6 +114,7 @@ export default {
         const response = await axios.post("http://localhost:3000/admin/novoAdmin", this.admin);
         
         alert("Cadastro realizado com sucesso");
+        this.$router.push({name: 'home'});
         
       } catch (error) {
         console.log(error);

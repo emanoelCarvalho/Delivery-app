@@ -55,7 +55,7 @@ export default {
           alert('Credenciais inválidas. Tente novamente.');
         }
       } catch (error) {
-        console.error('Erro ao fazer login: ', error);
+        console.log('Erro ao fazer login');
         alert('Erro ao fazer login. Por favor, tente novamente mais tarde.');
       }
     },
