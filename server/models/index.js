@@ -10,39 +10,29 @@ const ItemPedidoHasItem = require("./itemPedidoHasItem");
 const sequelize = require("../database/connection");
 
 try {
-  //Pedido
-
+  // Pedido
   Pedido.belongsTo(User, {});
-
   Pedido.belongsTo(Cardapio, {});
-
   Pedido.hasMany(ItemPedido, {});
 
-  //User
-
+  // User
   User.hasMany(Pedido, {});
 
-  //Cardapio
-
+  // Cardapio
   Cardapio.hasMany(Pedido, {});
-
   Cardapio.belongsToMany(Item, {
     through: ItemHasCardapio,
     onDelete: "cascade",
-  }); 
-  
+  });
 
-  //ItemPedido
-
+  // ItemPedido
   ItemPedido.belongsTo(Pedido, {});
-
   ItemPedido.belongsToMany(Item, {
     through: ItemPedidoHasItem,
     onDelete: "cascade",
   });
 
-  //Item
-
+  // Item
   Item.belongsToMany(Cardapio, {
     through: ItemHasCardapio,
     onDelete: "cascade",
@@ -71,5 +61,5 @@ module.exports = {
   Cardapio,
   Pedido,
   ItemPedido,
-  User
+  User,
 };
