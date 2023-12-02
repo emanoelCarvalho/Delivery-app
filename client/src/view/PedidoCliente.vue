@@ -20,10 +20,11 @@
                             <img class="product-image" :src="item.image" :alt="item.name">
                             <div class="product-details">
                                 <h3>{{ item.name }}</h3>
-                                <p>Preço: {{ item.price }}</p>
+                                <p>{{ item.itemDescription }}</p>
+                                <p>Preço: {{ item.unitPrice }}</p>
                                 <div class="item-controls">
                                     <button @click="decreaseQuantity(categoryName, index)">-</button>
-                                    <span>{{ item.quantity }}</span>
+                                    <span>{{ item.amount }}</span>
                                     <button @click="increaseQuantity(categoryName, index)">+</button>
                                 </div>
                             </div>
@@ -48,7 +49,7 @@
             };
         },
         mounted() {
-            axios.get('/items')
+            axios.get('/item/getItems')
                 .then(response => {
                     this.menuItems = response.data;
                 })
@@ -58,11 +59,11 @@
         },
         methods: {
             increaseQuantity(categoryName, index) {
-                this.menuItems[categoryName][index].quantity++;
+                this.menuItems[categoryName][index].amount++;
             },
             decreaseQuantity(categoryName, index) {
-                if (this.menuItems[categoryName][index].quantity > 0) {
-                    this.menuItems[categoryName][index].quantity--;
+                if (this.menuItems[categoryName][index].amount > 0) {
+                    this.menuItems[categoryName][index].amount--;
                 }
             }
         }
