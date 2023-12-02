@@ -22,6 +22,10 @@ Item.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    amount: {
+      type: DataTypes.STRING, 
+      allowNull: false
+    }
   },
   {
     sequelize,

@@ -4,9 +4,9 @@ const Item = require("../models/item");
 class ItemController {
   async createItem(req, res) {
     try {
-      const { name, itemDescription, unitPrice } = req.body;
+      const { name, itemDescription, unitPrice, amount } = req.body;
 
-      if (!name || !itemDescription || !unitPrice) {
+      if (!name || !itemDescription || !unitPrice || !amount) {
         return res
           .status(400)
           .json({ error: "Preencha todos os campos relacionados ao item" });
@@ -16,6 +16,7 @@ class ItemController {
         name,
         itemDescription,
         unitPrice,
+        amount
       });
 
       return res.status(201).json({
@@ -54,9 +55,9 @@ class ItemController {
   async updateItem(req, res) {
     try {
       const { id } = req.params;
-      const { name, itemDescription, unitPrice } = req.body;
+      const { name, itemDescription, unitPrice, amount } = req.body;
 
-      if (!name || !itemDescription || !unitPrice) {
+      if (!name || !itemDescription || !unitPrice || !amount) {
         return res.status(400).json({
           error: "Preencha todos os campos para fazer a atualização ",
         });
@@ -67,6 +68,7 @@ class ItemController {
           name,
           itemDescription,
           unitPrice,
+          amount
         },
         {
           where: { id: id },
