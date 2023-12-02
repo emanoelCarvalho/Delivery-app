@@ -48,7 +48,6 @@ export default {
         if (admin && token) {
           this.token = token;
           console.log('Login bem-sucedido');
-
           alert('Login bem-sucedido!');
         } else {
           console.log('Credenciais inválidas. Tente novamente.');
