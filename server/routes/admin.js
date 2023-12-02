@@ -7,6 +7,7 @@ router.get("/listarAdmin", AdminController.getAdmins);
 router.get("/getAdminById/:id", AdminController.getAdminById);
 router.patch("/updateAdmin/:id", AdminController.updateAdmin);
 router.delete("/deleteAdmin/:id", AdminController.deleteAdmin);
+
 router.post("/login", AdminController.loginAdmin);
 
 module.exports = router;
