@@ -6,13 +6,19 @@ const router = createRouter({
       {
         path: '/',
         name: 'home',
-        component: () => import('../components/PedidoFeito.vue'),
+        component: () => import('@/view/Pedido-Cliente.vue'),
       },
       {
         path: '/register',
         name: 'register',
-        component: () => import('@/components/Cadastro.vue')
+        component: () => import('@/view/Cadastro.vue')
       },
+
+      {
+        path: '/Pedido-Cliente',
+        name: 'Pedido-Cliente',
+        component: () => import("@/view/Pedido-Cliente.vue")
+      }
     ]
   })
   
