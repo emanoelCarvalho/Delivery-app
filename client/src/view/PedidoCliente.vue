@@ -1,41 +1,45 @@
 
-<template>
+<template>    
     <header class="header-up">
-        <nav class="nav-up">
-            <div class="logo-container">
-                <img class="logo" src="../lib/logo.png">
-            </div>
-            <ul class="Carrinho">
-                <button>Carrinho</button>
+      <nav class="nav-up">
+        <div class="logo-container">
+          <img class="logo" src="../lib/logo.png">
+        </div>
+        <ul class="Carrinho">
+          <a class="btn-car" href=""><img src="../lib/button-cart.png" alt=""></a>
             </ul>
         </nav>
     </header>
 
     <main class="main-content">
-            <div class="product-container">
-                <div v-for="(category, categoryName) in menuItems" :key="categoryName">
-                    <h2>{{ categoryName }}</h2>
-                    <div class="product-list">
-                        <div v-for="(item, index) in category" :key="index" class="product-item">
-                            <img class="product-image" :src="item.image" :alt="item.name">
-                            <div class="product-details">
-                                <h3>{{ item.name }}</h3>
-                                <p>{{ item.itemDescription }}</p>
-                                <p>Preço: {{ item.unitPrice }}</p>
-                                <div class="item-controls">
-                                    <button @click="decreaseQuantity(categoryName, index)">-</button>
-                                    <span>{{ item.amount }}</span>
-                                    <button @click="increaseQuantity(categoryName, index)">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="product-container">
+      <div v-for="(category, categoryName) in menuItems" :key="categoryName">
+        <h2>{{ categoryName }}</h2>
+        <div class="product-list">
+          <div v-for="(item, index) in category" :key="index" class="product-item" @click="toggleDescription(item)">
+            <div class="product-details">
+              <div class="item-content">
+                <img class="product-image" :src="item.image" :alt="item.name">
+                <div class="item-info">
+                  <h3>{{ item.name }}</h3>
+                  <p class="item-price">Preço: {{ item.unitPrice }}</p>
+                  <p v-if="item.showDescription" class="item-description">{{ item.itemDescription }}</p>
                 </div>
+              </div>
+              <div class="item-controls">
+                <button @click="decreaseQuantity(categoryName, index)">-</button>
+                <span>{{ item.amount }}</span>
+                <button @click="increaseQuantity(categoryName, index)">+</button>
+              </div>
             </div>
-        </main>
-
-    <div class="final-pedido">
-        <button>Finalizar Pedido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <div class="final-pedido">
+    <button class="finalizar-pedido">Finalizar Pedido</button>
     </div>
 </template>
 
@@ -49,8 +53,8 @@
             };
         },
         mounted() {
-            axios.get('/item/getItems')
-                .then(response => {
+          axios.get('/item/getItems')
+          .then(response => {
                     this.menuItems = response.data;
                 })
                 .catch(error => {
@@ -71,13 +75,16 @@
 </script>
 
 <style scoped>
+body{
+  background-color: white;
+}
 
 .header-up{
     position: fixed; 
     top: 0; 
     left: 0; 
     width: 100%; 
-    background-color: blue; 
+    background-color: rgb(255, 152, 68); 
     z-index: 999;
 }
 
@@ -96,11 +103,12 @@
 }
 
 .logo{
-    width: 15%;
+    width: 150px;
+    height: auto;
 }
 
 .main-content{
-    margin-top: 8%;
+    margin-top: 55px;
 }
 
 .product-container {
@@ -141,7 +149,6 @@
 }
 
 .final-pedido {
-  background-color: blue;
   padding: 10px;
   position: fixed;
   left: 0;
@@ -151,6 +158,68 @@
   justify-content: center;
   align-items: center;
   height: 30px;
+  margin-bottom: 15px;
+}
+
+.finalizar-pedido{
+ background-color: rgb(239, 40, 30);
+ width: 274px;
+ height: 57px;
+ border-radius: 10px;
+ color: white;
+ border: none;
+}
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaçamento entre os itens */
+}
+
+.product-item {
+  width: 100%; /* Largura total */
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+}
+
+.item-info {
+  flex: 1; /* Ocupa todo o espaço disponível */
+}
+
+.item-controls {
+  display: flex;
+  align-items: center;
+}
+
+.item-controls button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.item-description {
+  display: none;
+}
+
+.product-item.active .item-description {
+  display: block; /* Mostra a descrição quando o item é clicado */
 }
 </style>
