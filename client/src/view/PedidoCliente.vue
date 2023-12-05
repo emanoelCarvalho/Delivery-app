@@ -39,7 +39,7 @@
   </main>
   
   <div class="final-pedido">
-    <button class="finalizar-pedido">Finalizar Pedido</button>
+    <button class="finalizar-pedido" @click="alterRouter()">Finalizar Pedido</button>
     </div>
 </template>
 
@@ -69,6 +69,9 @@
                 if (this.menuItems[categoryName][index].amount > 0) {
                     this.menuItems[categoryName][index].amount--;
                 }
+            }, 
+            alterRouter() {
+              this.$router.push({name: "finalizarPedido"})
             }
         }
     }
