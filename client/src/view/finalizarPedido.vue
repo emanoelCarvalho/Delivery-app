@@ -1,4 +1,3 @@
-
 <template>    
     <header class="header-up">
       <nav class="nav-up">
@@ -42,8 +41,6 @@
             Entrega
           </label>
         </div>
-
-
         <div v-if="tipoEntrega === 'entrega'" class="detalhes-entrega">
           <input type="text" placeholder="Rua" v-model="endereco.rua" />
           <input type="text" placeholder="CEP" v-model="endereco.cep" />

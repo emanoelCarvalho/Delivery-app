@@ -39,7 +39,7 @@
   </main>
   
   <div class="final-pedido">
-    <button class="finalizar-pedido" @click="alterRouter()">Finalizar Pedido</button>
+    <button class="finalizar-pedido" @click="criarPedido">Finalizar Pedido</button>
     </div>
 </template>
 
@@ -69,12 +69,25 @@
                 if (this.menuItems[categoryName][index].amount > 0) {
                     this.menuItems[categoryName][index].amount--;
                 }
+            },
+            criarPedido() {
+              const pedido = {
+                description: "Este é o pedido teste", 
+                UserId: 1, 
+                CardapioId: 1
+              }; 
+
+              axios.post('/pedido/criarPedido', pedido)
+                .then(response => {
+                  console.log("Pedido criado com sucesso:", response.data);
+                  this.$router.push({name: 'finalizarPedido'});
+                })
+                .catch(error => {
+                  console.error("Erro ao criar pedido: ", error);
+                });
             }, 
-            alterRouter() {
-              this.$router.push({name: "finalizarPedido"})
-            }
-        }
-    }
+        }, 
+    };
 </script>
 
 <style scoped>
