@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: "/PedidoCliente/finalizarPedido", 
       name: "finalizarPedido", 
-      component: () => import("@/components/PedidoFeito.vue"), 
+      component: () => import("@/view/finalizarPedido.vue"), 
     }
   ],
 });
