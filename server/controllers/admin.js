@@ -183,13 +183,9 @@ class AdminController {
 
       const admin = await Admin.findOne({ where: { email } });
 
-      if (!admin) {
-        return res.status(404).json({ message: "Admin não encontrado" });
-      }
-
       const passwordMatch = await bcrypt.compare(password, admin.password);
 
-      if (!passwordMatch) {
+      if (!passwordMatch || !admin) {
         return res.status(401).json({ message: "Credenciais inválidas" });
       }
 
