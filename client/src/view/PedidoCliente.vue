@@ -1,17 +1,17 @@
 
-<template>    
-    <header class="header-up">
-      <nav class="nav-up">
-        <div class="logo-container">
-          <img class="logo" src="../lib/logo.png">
-        </div>
-        <ul class="Carrinho">
-          <a class="btn-car" href=""><img src="../lib/button-cart.png" alt=""></a>
-            </ul>
-        </nav>
-    </header>
+<template>
+  <header class="header-up">
+    <nav class="nav-up">
+      <div class="logo-container">
+        <img class="logo" src="../lib/logo.png">
+      </div>
+      <ul class="Carrinho">
+        <a class="btn-car" href=""><img src="../lib/button-cart.png" alt=""></a>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="main-content">
+  <main class="main-content">
     <div class="product-container">
       <div v-for="(category, categoryName) in menuItems" :key="categoryName">
         <h2>{{ categoryName }}</h2>
@@ -37,131 +37,135 @@
       </div>
     </div>
   </main>
-  
+
   <div class="final-pedido">
     <button class="finalizar-pedido" @click="criarPedido">Finalizar Pedido</button>
-    </div>
+  </div>
 </template>
 
 <script>
-    import axios from 'axios';
+import axios from 'axios';
 
-    export default {
-        data() {
-            return {
-                menuItems: {}
-            };
-        },
-        mounted() {
-          axios.get('/item/getItems')
-          .then(response => {
-                    this.menuItems = response.data;
-                })
-                .catch(error => {
-                    console.error('Erro ao buscar os itens:', error);
-                });
-        },
-        methods: {
-            increaseQuantity(categoryName, index) {
-                this.menuItems[categoryName][index].amount++;
-            },
-            decreaseQuantity(categoryName, index) {
-                if (this.menuItems[categoryName][index].amount > 0) {
-                    this.menuItems[categoryName][index].amount--;
-                }
-            },
-            criarPedido() {
-              const pedido = {
-                description: "Este é o pedido teste", 
-                UserId: 1, 
-                CardapioId: 1
-              }; 
-
-              axios.post('/pedido/criarPedido', pedido)
-                .then(response => {
-                  console.log("Pedido criado com sucesso:", response.data);
-                  this.$router.push({name: 'finalizarPedido'});
-                })
-                .catch(error => {
-                  console.error("Erro ao criar pedido: ", error);
-                });
-            }, 
-        }, 
+export default {
+  data() {
+    return {
+      menuItems: {}
     };
+  },
+  mounted() {
+    axios.get('/item/getItems')
+      .then(response => {
+        this.menuItems = response.data;
+      })
+      .catch(error => {
+        console.error('Erro ao buscar os itens:', error);
+      });
+  },
+  methods: {
+    showDescription(item) {
+      // Define a propriedade showDescription como true para mostrar a descrição
+      this.$set(item, 'showDescription', true);
+    },
+    increaseQuantity(categoryName, index) {
+      this.menuItems[categoryName][index].amount++;
+    },
+    decreaseQuantity(categoryName, index) {
+      if (this.menuItems[categoryName][index].amount > 0) {
+        this.menuItems[categoryName][index].amount--;
+      }
+    },
+    criarPedido() {
+      const pedido = {
+        description: "Este é o pedido teste",
+        UserId: 1,
+        CardapioId: 1
+      };
+
+      axios.post('/pedido/criarPedido', pedido)
+        .then(response => {
+          console.log("Pedido criado com sucesso:", response.data);
+          this.$router.push({ name: 'finalizarPedido' });
+        })
+        .catch(error => {
+          console.error("Erro ao criar pedido: ", error);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
-body{
+body {
   background-color: white;
 }
 
-.header-up{
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    background-color: rgb(255, 152, 68); 
-    z-index: 999;
+.header-up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(255, 152, 68);
+  z-index: 999;
 }
 
-.nav-up{
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    padding: 10px 20px;
+.nav-up {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
 }
 
-.Carrinho{
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
-    display: flex;
+.Carrinho {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
 }
 
-.logo{
-    width: 150px;
-    height: auto;
+.logo {
+  width: 150px;
+  height: auto;
 }
 
-.main-content{
-    margin-top: 55px;
+.main-content {
+  margin-top: 55px;
 }
 
 .product-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .product-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
-    padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
 }
 
 .product-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 200px;
 }
 
 .product-image {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
 }
 
 .product-details {
-    text-align: center;
+  text-align: center;
 }
 
 .item-controls {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .final-pedido {
@@ -177,22 +181,25 @@ body{
   margin-bottom: 15px;
 }
 
-.finalizar-pedido{
- background-color: rgb(239, 40, 30);
- width: 274px;
- height: 57px;
- border-radius: 10px;
- color: white;
- border: none;
+.finalizar-pedido {
+  background-color: rgb(239, 40, 30);
+  width: 274px;
+  height: 57px;
+  border-radius: 10px;
+  color: white;
+  border: none;
 }
+
 .product-list {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Espaçamento entre os itens */
+  gap: 10px;
+  /* Espaçamento entre os itens */
 }
 
 .product-item {
-  width: 100%; /* Largura total */
+  width: 100%;
+  /* Largura total */
 }
 
 .product-details {
@@ -215,7 +222,8 @@ body{
 }
 
 .item-info {
-  flex: 1; /* Ocupa todo o espaço disponível */
+  flex: 1;
+  /* Ocupa todo o espaço disponível */
 }
 
 .item-controls {
@@ -236,6 +244,6 @@ body{
 }
 
 .product-item.active .item-description {
-  display: block; /* Mostra a descrição quando o item é clicado */
-}
-</style>
+  display: block;
+  /* Mostra a descrição quando o item é clicado */
+}</style>

@@ -118,7 +118,7 @@ export default {
         valorTotal: this.calcularTotal(),
         endereco: this.endereco,
       };
-      axios.post('Gena: conexão com o back', dadosPedido)
+      axios.post('/itens/getItens', dadosPedido)
         .then(response => {
           console.log('Pedido Recebido', response.data);
         })
