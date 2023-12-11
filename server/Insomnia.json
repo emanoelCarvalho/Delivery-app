@@ -1,0 +1,192 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-04-15T22:41:27.201Z",
+    "__export_source": "insomnia.desktop.app:v2023.1.0",
+    "resources": [
+      {
+        "_id": "wrk_admin_routes",
+        "parentId": null,
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "name": "Admin Routes",
+        "description": "Routes for Admin",
+        "_type": "workspace"
+      },
+      {
+        "_id": "req_create_admin",
+        "parentId": "wrk_admin_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/admin/novoAdmin",
+        "name": "Create Admin",
+        "description": "Create a new admin",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\"name\": \"Admin Name\",\"phoneNumber\": \"123456789\",\"address\": \"Admin Address\",\"email\": \"admin@example.com\",\"password\": \"adminpass\",\"confirmPassword\": \"adminpass\",\"cnpj\": \"123456789\",\"bank\": \"Admin Bank\",\"agency\": \"1234\",\"account\": \"5678\"}"
+        },
+        "parameters": [],
+        "headers": [
+          {"name": "Content-Type", "value": "application/json"}
+        ],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_get_admins",
+        "parentId": "wrk_admin_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/admin/listarAdmins",
+        "name": "Get All Admins",
+        "description": "Get a list of all admins",
+        "method": "GET",
+        "body": {},
+        "parameters": [],
+        "headers": [],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }, 
+      {
+        "_id": "req_get_admin_by_id",
+        "parentId": "wrk_admin_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/admin/getAdminById/1",
+        "name": "Get Admin by ID",
+        "description": "Get details of a specific admin by ID",
+        "method": "GET",
+        "body": {},
+        "parameters": [],
+        "headers": [],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }, 
+      {
+        "_id": "req_update_admin",
+        "parentId": "wrk_admin_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/admin/updateAdmin/1", 
+        "name": "Update Admin",
+        "description": "Update details of a specific admin by ID",
+        "method": "PATCH",
+        "body": {
+          "mimeType": "application/json",
+          "text": {
+            "name": "Novo Nome",
+            "phoneNumber": "Novo Número",
+            "address": "Nova Endereço",
+            "email": "novoemail@example.com",
+            "password": "novasenha",
+            "confirmPassword": "novasenha",
+            "cnpj": "Novo CNPJ",
+            "bank": "Novo Banco",
+            "agency": "Nova Agência",
+            "account": "Nova Conta"
+          }
+        },
+        "parameters": [],
+        "headers": [
+          {"name": "Content-Type", "value": "application/json"}
+        ],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }, 
+      {
+        "_id": "req_login_admin",
+        "parentId": "wrk_admin_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/admin/login",
+        "name": "Login Admin",
+        "description": "Authenticate an admin and obtain an access token",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": {
+            "email": "admin@example.com",
+            "password": "adminpassword"
+          }
+        },
+        "parameters": [],
+        "headers": [
+          {"name": "Content-Type", "value": "application/json"}
+        ],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }, 
+      {
+        "_id": "req_delete_admin",
+        "parentId": "wrk_admin_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/admin/deleteAdmin/{adminId}",
+        "name": "Delete Admin",
+        "description": "Delete an admin by ID",
+        "method": "DELETE",
+        "body": {},
+        "parameters": [
+          {
+            "name": "adminId",
+            "value": "1", 
+            "id": "param_adminId",
+            "type": "string"
+          }
+        ],
+        "headers": [],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }      
+    ]
+  }
+  
