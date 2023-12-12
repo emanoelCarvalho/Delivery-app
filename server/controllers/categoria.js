@@ -80,7 +80,7 @@ class CategoriaController {
         ItemId,
       });
 
-      res.sjon(categoria);
+      res.json(categoria);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Erro ao atualizar a categoria" });
