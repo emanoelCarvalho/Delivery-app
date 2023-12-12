@@ -24,10 +24,4 @@ Cardapio.init(
   }
 );
 
-// Cardapio.sync({
-//   force: true,
-// }).then(() => {
-//   console.log("A tabela Cardapio foi criada");
-// });
-
 module.exports = Cardapio;

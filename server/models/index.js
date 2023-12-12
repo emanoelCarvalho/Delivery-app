@@ -25,7 +25,7 @@ try {
     through: ItemHasCardapio,
     onDelete: "cascade",
   });
-  Cardapio.hasMany(Categoria, {onDelete: "cascade"});
+  Cardapio.hasMany(Categoria,  {});
 
   // ItemPedido
   ItemPedido.belongsTo(Pedido, {});
