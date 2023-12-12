@@ -6,6 +6,7 @@ const Item = require("./item");
 const ItemPedido = require("./itemPedido");
 const ItemHasCardapio = require("./itemHasCardapio");
 const ItemPedidoHasItem = require("./itemPedidoHasItem");
+const Categoria = require("./categoria");
 
 const sequelize = require("../database/connection");
 
@@ -24,6 +25,7 @@ try {
     through: ItemHasCardapio,
     onDelete: "cascade",
   });
+  Cardapio.hasMany(Categoria, {onDelete: "cascade"});
 
   // ItemPedido
   ItemPedido.belongsTo(Pedido, {});
@@ -41,6 +43,13 @@ try {
     through: ItemPedidoHasItem,
     onDelete: "cascade",
   });
+  Item.belongsTo(Categoria);
+
+  //Categoria
+
+  Categoria.hasMany(Item, {onDelete: "cascade"});
+  Categoria.belongsTo(Cardapio);
+
 
   console.log("Relacionamentos definidos com sucesso");
 } catch (error) {
@@ -62,4 +71,6 @@ module.exports = {
   Pedido,
   ItemPedido,
   User,
+  Item, 
+  Categoria
 };
