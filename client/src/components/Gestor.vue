@@ -1,20 +1,6 @@
 <template>
   <div class="container">
-    <div class="barranav">
-      <div class="logo-container">
-        <img src="../../public/logo.png" alt="logo" class="logomarca">
-      </div>
-      <div class="btn-container">
-        <v-btn>Pedidos</v-btn>
-        <v-btn>Gestor</v-btn>
-        <v-btn>Análise</v-btn>
-        <v-btn>IA</v-btn>
-        <v-btn>Configurações</v-btn>
-      </div>
-      <div>
-        <v-switch hide-details color="success"></v-switch>
-      </div>
-    </div>
+    <Header />
     <div class="criacao">
       <button @click="toggleInput('categoria')">Criar categoria</button>
       <input v-if="mostrarInputCategoria" v-model="categoria.nome" placeholder="Nome da categoria">
@@ -32,19 +18,9 @@
     <div class="categorias">
       <h3>Nome da categoria</h3>
       <div id="linha"></div>
-      <div class="itens">
-        <img src="../assets/download.png" alt="foto" id="fotoitem">
-        <figcaption>
-          <p id="nomeprod">Nome do produto</p>
-        </figcaption>
-        <p>
-          <input type="checkbox" id="toggleitem">
-          <label for="toggleitem"></label>
-        <p>
-          <input type="number" class="preco">
-        </p>
-        <button id="botaoedit">Editar</button>
-        </p>
+      <div class="products">
+        <Product name="Feijoada - Um texto gigante aqui pra testar" :price="19.90" :amount="5" />
+        <Product name="Camarão na moranga" :price="39.99" :amount="5" />
       </div>
     </div>
   </div>
@@ -52,8 +28,14 @@
   
 <script>
 import axios from 'axios';
+import Header from './Header.vue';
+import Product from './Product.vue';
 
 export default {
+  components: {
+    Header,
+    Product,
+  },
   data() {
     return {
       mostrarInputCategoria: false,
@@ -217,20 +199,6 @@ export default {
   left: calc(100% - 22px);
 }
 
-.logomarca {
-  max-width: 200px;
-  max-height: 200px;
-}
-
-.barranav {
-  background-color: #FF9944;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-}
-
 .criacao {
   margin-top: 35px;
 }
@@ -308,15 +276,11 @@ export default {
   border-bottom: 2px solid black;
 }
 
-.btn-container {
+.products {
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 32px 16px 16px;
 }
 </style>
   
