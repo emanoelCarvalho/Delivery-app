@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <v-card max-width="200px" height="fit-content">
+  <v-card max-width="200px" height="fit-content" hover variant="flat" class="card">
     <div class="product">
       <div class="product-image">
         <img src="https://picsum.photos/168/156" alt="product">
@@ -40,9 +40,10 @@ export default {
             <v-btn @click="add" variant="text" block>Comprar</v-btn>
           </div>
           <div v-else class="product-buttons">
-            <v-btn @click="remove" density="comfortable" icon="mdi-minus" :disabled="count === 0"></v-btn>
+            <v-btn v-if="count > 1" @click="remove" density="comfortable" icon="mdi-minus" color="red"></v-btn>
+            <v-btn v-else @click="remove" density="comfortable" icon="mdi-delete" color="red"></v-btn>
             <p>{{ count }}</p>
-            <v-btn @click="add" density="comfortable" icon="mdi-plus" :disabled="count === amount"></v-btn>
+            <v-btn @click="add" density="comfortable" icon="mdi-plus" :disabled="count === amount" color="green"></v-btn>
           </div>
         </div>
       </div>
@@ -51,6 +52,10 @@ export default {
 </template>
 
 <style scoped>
+.card {
+  cursor: default;
+}
+
 .addProduct {
   display: flex;
   flex-direction: column;
