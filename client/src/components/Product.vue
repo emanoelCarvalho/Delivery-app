@@ -7,19 +7,37 @@ export default {
     };
   },
   props: {
-    name: String,
-    price: Number,
-    amount: Number,
+    id: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
   },
   methods: {
+    emitProduct() {
+      this.$emit('productChange', this.id, this.count);
+    },
     add() {
       if (this.count < this.amount) {
         this.count++;
+        this.emitProduct();
       }
     },
     remove() {
       if (this.count > 0) {
         this.count--;
+        this.emitProduct();
       }
     },
   }

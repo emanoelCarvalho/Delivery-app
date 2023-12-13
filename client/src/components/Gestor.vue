@@ -19,10 +19,10 @@
       <h3>Nome da categoria</h3>
       <div id="linha"></div>
       <div class="products">
-        <Product name="Feijoada - Um texto gigante aqui pra testar" :price="19.90" :amount="5" />
-        <Product name="Camarão na moranga" :price="39.99" :amount="5" />
+        <Product v-for="product in products" :key="product.name" v-bind="product" @product-change="onProductChange" />
       </div>
     </div>
+    <Chart :products="cartProducts" />
   </div>
 </template>
   
@@ -30,11 +30,13 @@
 import axios from 'axios';
 import Header from './Header.vue';
 import Product from './Product.vue';
+import Chart from './Chart.vue';
 
 export default {
   components: {
     Header,
     Product,
+    Chart,
   },
   data() {
     return {
@@ -45,13 +47,32 @@ export default {
       },
       item: {
         name: '',
-        itemDescription: '',
         unitPrice: '',
         amount: '',
       },
+      products: [
+        {
+          id: 1,
+          name: 'Feijoada',
+          price: 19.90,
+          amount: 5,
+        },
+        {
+          id: 2,
+          name: 'Camarão na moranga',
+          price: 39.99,
+          amount: 5,
+        },
+      ],
+      cartProducts: [],
     };
   },
   methods: {
+    onProductChange(id, count) {
+      const product = this.products.find(product => product.id === id);
+      product.count = count;
+      this.cartProducts = this.products.filter(product => product.count > 0);
+    },
     toggleInput(tipo) {
       // Resetar valores e alternar a visibilidade do input
       if (tipo === 'categoria') {

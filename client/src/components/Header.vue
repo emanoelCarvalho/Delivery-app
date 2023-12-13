@@ -12,7 +12,9 @@ export default {
 <template>
   <div class="barranav">
     <div class="logo-container">
-      <img src="../../public/logo.png" alt="logo" class="logomarca">
+      <a href="/">
+        <img src="../../public/logo.png" alt="logo" class="logomarca">
+      </a>
     </div>
     <div class="btn-container">
       <v-btn>Pedidos</v-btn>
