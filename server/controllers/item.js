@@ -6,10 +6,10 @@ class ItemController {
     try {
       const { name, itemDescription, unitPrice, amount, category} = req.body;
 
-      if (!name || !itemDescription || !unitPrice || !amount, !category) {
-        return res
-          .status(400)
-          .json({ error: "Preencha todos os campos relacionados ao item" });
+      const requiredFields = [name, itemDescription, unitPrice, amount, category];
+
+      if (requiredFields.some((field) => !field)) {
+        return res.status(400).json({ error: "Preencha todos os campos" });
       }
 
       const newItem = await Item.create({
@@ -58,12 +58,12 @@ class ItemController {
       const { id } = req.params;
       const { name, itemDescription, unitPrice, amount, category } = req.body;
 
-      if (!name || !itemDescription || !unitPrice || !amount, !category) {
-        return res.status(400).json({
-          error: "Preencha todos os campos para fazer a atualização ",
-        });
-      }
+      const requiredFields = [name, itemDescription, unitPrice, amount, category];
 
+      if (requiredFields.some((field) => !field)) {
+        return res.status(400).json({ error: "Preencha o campo para atualizar" });
+      }
+      
       await Item.update(
         {
           name,

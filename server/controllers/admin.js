@@ -19,23 +19,25 @@ class AdminController {
         agency,
         account,
       } = req.body;
-  
-      if (
-        !name ||
-        !phoneNumber ||
-        !address ||
-        !email ||
-        !password ||
-        !confirmPassword ||  // Certifique-se de usar o nome correto aqui
-        !cnpj ||
-        !bank ||
-        !agency ||
-        !account
-      ) {
+
+      const requiredFields = [
+        name,
+        phoneNumber,
+        address,
+        email,
+        password,
+        confirmPassword,
+        cnpj,
+        bank,
+        agency,
+        account,
+      ];
+
+      if (requiredFields.some((field) => !field)) {
         return res.status(400).json({ error: "Preencha todos os campos" });
       }
-  
-  if (password !== confirmPassword) {
+
+      if (password !== confirmPassword) {
         return res.status(400).json({ error: "As senhas não coincidem" });
       }
 
@@ -47,7 +49,7 @@ class AdminController {
         address,
         email,
         password: hashedPassword,
-        confirmPassword: hashedPassword, 
+        confirmPassword: hashedPassword,
         cnpj,
         bank,
         agency,
@@ -102,19 +104,21 @@ class AdminController {
         account,
       } = req.body;
 
-      if (
-        !name ||
-        !phoneNumber ||
-        !address ||
-        !email ||
-        !password ||
-        !cnpj ||
-        !confirmPassword ||
-        !bank ||
-        !agency ||
-        !account
-      ) {
-        return res.status(400).json({ error: "Preencha todos os campos" });
+      const requiredFields = [
+        name,
+        phoneNumber,
+        address,
+        email,
+        cnpj,
+        bank,
+        agency,
+        account,
+      ];
+
+      if (requiredFields.some((field) => !field)) {
+        return res
+          .status(400)
+          .json({ error: "Preencha todos os campos obrigatórios" });
       }
 
       if (password !== confirmPassword) {
@@ -130,7 +134,6 @@ class AdminController {
           address,
           email,
           password: hashedPassword,
-          confirmPassword: hashedPassword,
           cnpj,
           bank,
           agency,
@@ -141,7 +144,19 @@ class AdminController {
         }
       );
 
-      const updatedAdmin = await Admin.findByPk(id);
+      const updatedAdmin = await Admin.findByPk(id, {
+        attributes: [
+          "id",
+          "name",
+          "phoneNumber",
+          "address",
+          "email",
+          "cnpj",
+          "bank",
+          "agency",
+          "account",
+        ],
+      });
 
       return res.status(200).json({
         message: "Admin atualizado com sucesso",
@@ -193,12 +208,10 @@ class AdminController {
         expiresIn: "1h",
       });
 
-      return res
-        .status(200)
-        .json({
-          token,
-          admin: { id: admin.id, name: admin.name, email: admin.email },
-        });
+      return res.status(200).json({
+        token,
+        admin: { id: admin.id, name: admin.name, email: admin.email },
+      });
     } catch (error) {
       console.error("Erro ao autenticar usuário", error);
       return res.status(500).json({ error: "Erro interno no servidor" });

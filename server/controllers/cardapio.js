@@ -78,7 +78,6 @@ class cardapioController {
         }
       );
 
-      // If itemIds are provided, update the association
       if (itemIds && itemIds.length > 0) {
         const cardapioInstance = await Cardapio.findByPk(id);
         await cardapioInstance.setItems(itemIds);
