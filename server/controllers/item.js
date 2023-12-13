@@ -1,12 +1,18 @@
 const { where } = require("sequelize");
-const Item = require("../models/item");
+const { Item, Acompanhamento } = require("../models");
 
 class ItemController {
   async createItem(req, res) {
     try {
-      const { name, itemDescription, unitPrice, amount, category} = req.body;
+      const { name, unitPrice, amount, category, AcompanhamentoId } = req.body;
 
-      const requiredFields = [name, itemDescription, unitPrice, amount, category];
+      const requiredFields = [
+        name,
+        unitPrice,
+        amount,
+        category,
+        AcompanhamentoId,
+      ];
 
       if (requiredFields.some((field) => !field)) {
         return res.status(400).json({ error: "Preencha todos os campos" });
@@ -14,10 +20,10 @@ class ItemController {
 
       const newItem = await Item.create({
         name,
-        itemDescription,
         unitPrice,
         amount,
-        category
+        category,
+        AcompanhamentoId,
       });
 
       return res.status(201).json({
@@ -31,7 +37,9 @@ class ItemController {
 
   async getItems(req, res) {
     try {
-      const items = await Item.findAll();
+      const items = await Item.findAll({
+        include: [Acompanhamento],
+      });
       return res.status(200).json({ items });
     } catch (error) {
       console.log("Erro ao encontrar o cardápio: ", error);
@@ -41,7 +49,9 @@ class ItemController {
 
   async getItemById(req, res) {
     try {
-      const item = await Item.findByPk(req.params.id);
+      const item = await Item.findByPk(req.params.id, {
+        include: [Acompanhamento],
+      });
       if (item) {
         return res.status(200).json({ item });
       } else {
@@ -56,21 +66,29 @@ class ItemController {
   async updateItem(req, res) {
     try {
       const { id } = req.params;
-      const { name, itemDescription, unitPrice, amount, category } = req.body;
+      const { name, unitPrice, amount, category, AcompanhamentoId } = req.body;
 
-      const requiredFields = [name, itemDescription, unitPrice, amount, category];
+      const requiredFields = [
+        name,
+        unitPrice,
+        amount,
+        category,
+        AcompanhamentoId,
+      ];
 
       if (requiredFields.some((field) => !field)) {
-        return res.status(400).json({ error: "Preencha o campo para atualizar" });
+        return res
+          .status(400)
+          .json({ error: "Preencha o campo para atualizar" });
       }
-      
+
       await Item.update(
         {
           name,
-          itemDescription,
           unitPrice,
-          amount, 
-          category
+          amount,
+          category,
+          AcompanhamentoId,
         },
         {
           where: { id: id },
