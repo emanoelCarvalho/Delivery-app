@@ -4,13 +4,14 @@ const { Item, Acompanhamento } = require("../models");
 class ItemController {
   async createItem(req, res) {
     try {
-      const { name, unitPrice, amount, category, AcompanhamentoId } = req.body;
+      const { name, unitPrice, amount, category, itemDescription,AcompanhamentoId } = req.body;
 
       const requiredFields = [
         name,
         unitPrice,
         amount,
         category,
+        itemDescription,
         AcompanhamentoId,
       ];
 
@@ -23,6 +24,7 @@ class ItemController {
         unitPrice,
         amount,
         category,
+        itemDescription,
         AcompanhamentoId,
       });
 
@@ -66,13 +68,14 @@ class ItemController {
   async updateItem(req, res) {
     try {
       const { id } = req.params;
-      const { name, unitPrice, amount, category, AcompanhamentoId } = req.body;
+      const { name, unitPrice, amount, category, itemDescription, AcompanhamentoId } = req.body;
 
       const requiredFields = [
         name,
         unitPrice,
         amount,
         category,
+        itemDescription,
         AcompanhamentoId,
       ];
 
@@ -88,6 +91,7 @@ class ItemController {
           unitPrice,
           amount,
           category,
+          itemDescription,
           AcompanhamentoId,
         },
         {

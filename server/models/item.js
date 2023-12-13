@@ -22,6 +22,10 @@ Item.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    itemDescription: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     category: {
       type: DataTypes.STRING,
       allowNull: false,
