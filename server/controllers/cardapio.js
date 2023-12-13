@@ -7,8 +7,10 @@ class cardapioController {
     try {
       const { day, itemIds } = req.body;
 
-      if (!day || !itemIds || itemIds.length === 0) {
-        return res.status(400).json({ error: "Preencha day e pelo menos um item" });
+      const requiredFields = [day, itemIds];
+
+      if (requiredFields.some((field) => !field)) {
+        return res.status(400).json({ error: "Preencha todos os campos" });
       }
 
       const novoCardapio = await Cardapio.create({
@@ -65,8 +67,10 @@ class cardapioController {
       const { id } = req.params;
       const { day, itemIds } = req.body;
 
-      if (!day) {
-        return res.status(400).json({ error: "Preencha o campo para atualizar" });
+      const requiredFields = [day, itemIds];
+
+      if (requiredFields.some((field) => !field)) {
+        return res.status(400).json({ error: "Preencha todos os campos" });
       }
 
       await Cardapio.update(

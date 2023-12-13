@@ -31,11 +31,14 @@ class ItemPedidoController {
     try {
       const { amount, price, PedidoId } = req.body;
 
-      if (!amount || !price || !PedidoId) {
+      const requiredFields = [amount, price, PedidoId];
+
+      if (requiredFields.some((field) => !field)) {
         return res.status(400).json({
           error: "Preencha todos os campos necessários do item pedido",
         });
       }
+
       const newItemPedido = await ItemPedido.create({
         amount,
         price,
@@ -58,12 +61,14 @@ class ItemPedidoController {
 
       const { amount, price, PedidoId } = req.body;
 
-      if (!amount || !price || !PedidoId) {
+      const requiredFields = [amount, price, PedidoId];
+
+      if (requiredFields.some((field) => !field)) {
         return res.status(400).json({
-          erro: "Preencha todos os campos para atualizar o item pedido",
+          error: "Preencha todos os campos necessários do item pedido",
         });
       }
-
+      
       await updateItemPedido.update({
         amount,
         price,

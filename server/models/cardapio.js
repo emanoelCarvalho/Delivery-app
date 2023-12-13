@@ -1,9 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../database/connection");
 
-class Cardapio extends Model {
-  // day;
-}
+class Cardapio extends Model {}
 
 Cardapio.init(
   {

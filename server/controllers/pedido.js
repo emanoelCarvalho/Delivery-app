@@ -17,11 +17,14 @@ class PedidoController {
     try {
       const { description, UserId, CardapioId } = req.body;
 
-      if (!description || !UserId || !CardapioId) {
-        return res
-          .status(400)
-          .json({ error: "Preencha todos os campos do pedido" });
+      const requiredFields = [description, UserId, CardapioId];
+
+      if (requiredFields.some((field) => !field)) {
+        return res.status(400).json({
+          error: "Preencha todos os campos necessários do pedido",
+        });
       }
+
       const novoPedido = await Pedido.create({
         description,
         UserId,
@@ -60,12 +63,14 @@ class PedidoController {
 
       const { description, UserId, CardapioId } = req.body;
 
-      if (!description || !UserId || !CardapioId) {
-        return res
-          .status(400)
-          .json({ error: "Preencha todos os campos do pedido" });
-      }
+      const requiredFields = [description, UserId, CardapioId];
 
+      if (requiredFields.some((field) => !field)) {
+        return res.status(400).json({
+          error: "Preencha todos os campos necessários do pedido",
+        });
+      }
+      
       await pedido.update({
         description,
         UserId,
