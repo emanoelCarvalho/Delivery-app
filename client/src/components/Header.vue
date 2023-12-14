@@ -58,7 +58,7 @@ export default {
       <v-switch v-if="$store.getters.isAdmin" hide-details color="success"></v-switch>
       <v-btn v-if="$store.getters.isAdmin" color="white" prepend-icon="mdi-logout-variant" text variant="tonal"
         @click="logout">Logout</v-btn>
-      <v-btn v-else color="white" prepend-icon="mdi-login-variant" text variant="tonal" @click="login">Login</v-btn>
+      <v-btn v-else color="white" prepend-icon="mdi-login-variant" text variant="tonal" to="/login">Login</v-btn>
     </div>
   </div>
 </template>

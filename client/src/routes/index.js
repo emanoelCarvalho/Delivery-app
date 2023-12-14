@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
   history: createWebHistory(""),
@@ -7,6 +7,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: () => import("@/components/Gestor.vue"),
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("@/components/AdminLogin.vue"),
     },
     {
       path: "/register",
@@ -20,11 +25,11 @@ const router = createRouter({
       component: () => import("@/view/PedidoCliente.vue"),
     },
     {
-      path: "/PedidoCliente/finalizarPedido", 
-      name: "finalizarPedido", 
-      component: () => import("@/view/finalizarPedido.vue"), 
-    }
+      path: "/PedidoCliente/finalizarPedido",
+      name: "finalizarPedido",
+      component: () => import("@/view/finalizarPedido.vue"),
+    },
   ],
-});
+})
 
-export default router;
+export default router
