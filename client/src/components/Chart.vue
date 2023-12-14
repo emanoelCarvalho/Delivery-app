@@ -1,4 +1,6 @@
 <script>
+import { EventBus } from '@/lib/eventBus';
+
 export default {
   name: 'Chart',
   data() {
@@ -16,8 +18,17 @@ export default {
     openChart() {
       this.open = true;
     },
-  }
+    removeProduct(index) {
+      EventBus.emit('product-removed', this.products[index].id);
+      this.$emit('productRemove', index);
+      if (this.products.length === 0) {
+        this.open = false;
+      }
+    }
+  },
+  emits: ['productRemove'],
 }
+
 </script>
 <template>
   <v-btn :disabled="this.products.length === 0" class="cartButton" @click="openChart" icon="mdi-cart"
@@ -25,23 +36,31 @@ export default {
   <v-dialog v-model="open" max-width="500px">
     <v-card title="Carrinho" prepend-icon="mdi-cart-outline">
       <v-card-text>
-        <v-list lines="two">
-          <v-list-item v-for="product in products" :key="product.id">
-            <v-list-item-title>{{ product.count }}x {{ product.name }}</v-list-item-title>
-            <v-list-item-subtitle>R$ {{ (product.price * product.count).toFixed(2) }}</v-list-item-subtitle>
+        <v-list>
+          <v-list-item v-for="(product, index) in products" :key="index">
+            <v-list-item-title>{{ product.name }}</v-list-item-title>
+            <v-list-item-subtitle>R$ {{ (product.price).toFixed(2) }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="ml-2" v-for="sideDish in product.sideDishes" :key="sideDish.id">
+              {{ product.sideDishesOptions.find(option => option.id === sideDish).name }}
+            </v-list-item-subtitle>
+            <v-list-item-action>
+              <v-btn icon @click="removeProduct(index)">
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
         <v-list>
           <v-list-item>
             <v-list-item-title>Subtotal</v-list-item-title>
-            <v-list-item-subtitle>R$ {{ products.reduce((acc, product) => acc + product.price * product.count,
-              0).toFixed(2) }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="ml-2">R$ {{ products.reduce((acc, product) => acc + product.price, 0).toFixed(2)
+            }}</v-list-item-subtitle>
           </v-list-item>
         </v-list>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="blue darken-1" text @click="open = false">Fechar</v-btn>
+        <v-btn color="blue darken-1" text @click="open = false">Adicionar mais itens</v-btn>
         <v-spacer></v-spacer>
         <v-btn color="green darken-1" text>Finalizar compra</v-btn>
       </v-card-actions>

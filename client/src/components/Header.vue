@@ -11,11 +11,9 @@ export default {
 
 <template>
   <div class="barranav">
-    <div class="logo-container">
-      <a href="/">
-        <img src="../../public/logo.png" alt="logo" class="logomarca">
-      </a>
-    </div>
+    <a href="/" class="logo-container">
+      <img src="../../public/logo.png" alt="logo" class="logomarca">
+    </a>
     <div class="btn-container">
       <v-btn>Pedidos</v-btn>
       <v-btn>Gestor</v-btn>
@@ -53,5 +51,6 @@ export default {
 .logo-container {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 </style>

@@ -1,9 +1,13 @@
 <script>
+import { EventBus } from '@/lib/eventBus';
+
 export default {
   name: 'Product',
   data() {
     return {
       count: 0,
+      open: false,
+      sideDishes: [],
     };
   },
   props: {
@@ -15,6 +19,9 @@ export default {
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+    },
     price: {
       type: Number,
       required: true,
@@ -23,62 +30,86 @@ export default {
       type: Number,
       required: true,
     },
+    sideDishesOptions: {
+      type: Array,
+    },
+  },
+  created() {
+    EventBus.on('product-removed', this.onProductRemoved);
+  },
+  beforeUnmount() {
+    EventBus.off('product-removed', this.onProductRemoved);
   },
   methods: {
+    onProductRemoved(productId) {
+      if (this.id === productId && this.count > 0) {
+        this.count--;
+      }
+    },
     emitProduct() {
-      this.$emit('productChange', this.id, this.count);
+      const product = {
+        id: this.id,
+        name: this.name,
+        price: this.price,
+        sideDishes: this.sideDishes,
+        sideDishesOptions: this.sideDishesOptions,
+      };
+      this.$emit('productAdd', product);
     },
     add() {
       if (this.count < this.amount) {
         this.count++;
+        this.open = false;
         this.emitProduct();
+        this.sideDishes = [];
       }
-    },
-    remove() {
-      if (this.count > 0) {
-        this.count--;
-        this.emitProduct();
-      }
-    },
-  }
+    }
+  },
+  emits: ['productAdd'],
 }
 </script>
 
 <template>
-  <v-card max-width="200px" height="fit-content" hover variant="flat" class="card">
+  <v-card max-width="300px" height="fit-content" hover variant="flat" class="card" @click="open = true"
+    :disabled="count === amount">
     <div class="product">
       <div class="product-image">
         <img src="https://picsum.photos/168/156" alt="product">
       </div>
       <div class="product-info">
-        <h4>R$ {{ price }}</h4>
+        <h4>R$ {{ price.toFixed(2) }}</h4>
         <p>{{ name }}</p>
-        <div class="addProduct">
-          <div v-if="count === 0">
-            <v-btn @click="add" variant="text" block>Comprar</v-btn>
-          </div>
-          <div v-else class="product-buttons">
-            <v-btn v-if="count > 1" @click="remove" density="comfortable" icon="mdi-minus" color="red"></v-btn>
-            <v-btn v-else @click="remove" density="comfortable" icon="mdi-delete" color="red"></v-btn>
-            <p>{{ count }}</p>
-            <v-btn @click="add" density="comfortable" icon="mdi-plus" :disabled="count === amount" color="green"></v-btn>
-          </div>
-        </div>
       </div>
     </div>
   </v-card>
+  <v-dialog v-model="open" max-width="500px">
+    <v-card :title="name" :subtitle="description">
+      <v-card-text>
+        <v-container fluid>
+          <div v-for="sideDish in sideDishesOptions" :key="sideDish.id" class="sideDishNameContainer">
+            <p>{{ sideDish.name }}</p>
+            <div>
+              <v-checkbox v-model="sideDishes" :value="sideDish.id" dense hide-details class="text-right"></v-checkbox>
+            </div>
+          </div>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="red darken-1" text @click="open = false">Cancelar</v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="green darken-1" @click="add" text>Adicionar - R$ {{ price.toFixed(2) }}</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <style scoped>
-.card {
-  cursor: default;
-}
-
-.addProduct {
+.sideDishNameContainer {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
 }
 
 .product-image {
@@ -93,14 +124,6 @@ export default {
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-}
-
-.product-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  width: 100%;
 }
 
 .product-info {
