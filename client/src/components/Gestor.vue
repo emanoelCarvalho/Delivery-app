@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <Header />
     <div class="criacao">
       <button @click="toggleInput('categoria')">Criar categoria</button>
       <input v-if="mostrarInputCategoria" v-model="categoria.nome" placeholder="Nome da categoria">
