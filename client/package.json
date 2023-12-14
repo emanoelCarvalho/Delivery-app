@@ -12,7 +12,9 @@
     "mitt": "^3.0.1",
     "vue": "^3.2.13",
     "vue-router": "^4.2.5",
-    "vuetify": "^3.4.6"
+    "vuetify": "^3.4.6",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",

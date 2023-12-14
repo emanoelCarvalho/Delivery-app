@@ -6,6 +6,7 @@ import "vuetify/styles"
 import { createVuetify } from "vuetify"
 import * as components from "vuetify/components"
 import * as directives from "vuetify/directives"
+import store from "./store/store"
 
 const vuetify = createVuetify({
   components,
@@ -15,4 +16,4 @@ const vuetify = createVuetify({
 axios.defaults.baseURL = "http://localhost:3000"
 
 const app = createApp(App)
-app.use(vuetify).use(router).mount("#app")
+app.use(store).use(vuetify).use(router).mount("#app")

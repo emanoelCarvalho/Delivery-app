@@ -31,26 +31,27 @@ export default {
 
 </script>
 <template>
-  <v-btn :disabled="this.products.length === 0" class="cartButton" @click="openChart" icon="mdi-cart"
-    color="green"></v-btn>
+  <v-btn :disabled="this.products.length === 0 || $store.getters.isAdmin" class="cartButton" @click="openChart"
+    icon="mdi-cart" color="green"></v-btn>
   <v-dialog v-model="open" max-width="500px">
     <v-card title="Carrinho" prepend-icon="mdi-cart-outline">
       <v-card-text>
         <v-list>
           <v-list-item v-for="(product, index) in products" :key="index">
-            <v-list-item-title>{{ product.name }}</v-list-item-title>
-            <v-list-item-subtitle>R$ {{ (product.price).toFixed(2) }}</v-list-item-subtitle>
-            <v-list-item-subtitle class="ml-2" v-for="sideDish in product.sideDishes" :key="sideDish.id">
-              {{ product.sideDishesOptions.find(option => option.id === sideDish).name }}
-            </v-list-item-subtitle>
-            <v-list-item-action>
-              <v-btn icon @click="removeProduct(index)">
-                <v-icon>mdi-delete</v-icon>
-              </v-btn>
-            </v-list-item-action>
+            <div class="productContainer">
+              <div class="itemContainer">
+                <v-list-item-title>{{ product.name }}</v-list-item-title>
+                <v-list-item-subtitle>R$ {{ (product.price).toFixed(2) }}</v-list-item-subtitle>
+                <v-list-item-subtitle class="ml-2" v-for="sideDish in product.sideDishes" :key="sideDish.id">
+                  {{ product.sideDishesOptions.find(option => option.id === sideDish).name }}
+                </v-list-item-subtitle>
+              </div>
+              <v-btn icon="mdi-delete" @click="removeProduct(index)" variant="plain" color="red darken-1"
+                density="compact"></v-btn>
+            </div>
+            <v-divider></v-divider>
           </v-list-item>
         </v-list>
-        <v-divider></v-divider>
         <v-list>
           <v-list-item>
             <v-list-item-title>Subtotal</v-list-item-title>
@@ -72,5 +73,16 @@ export default {
   position: absolute;
   bottom: 16px;
   right: 16px;
+}
+
+.productContainer {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.itemContainer {
+  display: flex;
+  flex-direction: column;
 }
 </style>

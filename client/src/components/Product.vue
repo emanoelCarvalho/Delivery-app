@@ -89,7 +89,8 @@ export default {
           <div v-for="sideDish in sideDishesOptions" :key="sideDish.id" class="sideDishNameContainer">
             <p>{{ sideDish.name }}</p>
             <div>
-              <v-checkbox v-model="sideDishes" :value="sideDish.id" dense hide-details class="text-right"></v-checkbox>
+              <v-checkbox v-model="sideDishes" :value="sideDish.id" density="compact" hide-details
+                :disabled="$store.getters.isAdmin" class="text-right"></v-checkbox>
             </div>
           </div>
         </v-container>
@@ -97,7 +98,9 @@ export default {
       <v-card-actions>
         <v-btn color="red darken-1" text @click="open = false">Cancelar</v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" @click="add" text>Adicionar - R$ {{ price.toFixed(2) }}</v-btn>
+        <v-btn :disabled="$store.getters.isAdmin" color="green darken-1" @click="add" text>Adicionar - R$ {{
+          price.toFixed(2)
+        }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
