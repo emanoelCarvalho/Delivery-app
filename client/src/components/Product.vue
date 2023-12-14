@@ -30,8 +30,16 @@ export default {
       type: Number,
       required: true,
     },
+    imageLink: {
+      type: String,
+      required: true,
+    },
     sideDishesOptions: {
       type: Array,
+    },
+    category: {
+      type: String,
+      required: true,
     },
   },
   created() {
@@ -74,7 +82,7 @@ export default {
     :disabled="count === amount">
     <div class="product">
       <div class="product-image">
-        <img src="https://picsum.photos/168/156" alt="product">
+        <img :src="imageLink" alt="product">
       </div>
       <div class="product-info">
         <h4>R$ {{ price.toFixed(2) }}</h4>

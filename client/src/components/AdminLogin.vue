@@ -35,13 +35,13 @@ export default {
 <template>
   <div class="loginContainer">
     <v-card class="cardContainer">
-      <v-card-title>
+      <v-card-title class="cardTitle">
         <h1>Login</h1>
       </v-card-title>
       <v-card-text>
-        <v-form>
-          <v-text-field v-model="email" label="Email" type="email"></v-text-field>
-          <v-text-field v-model="password" label="Password" type="password"></v-text-field>
+        <v-form class="formContainer">
+          <v-text-field v-model="email" label="Email" type="email" hide-details></v-text-field>
+          <v-text-field v-model="password" label="Password" type="password" hide-details></v-text-field>
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -52,6 +52,16 @@ export default {
   </div>
 </template>
 <style scoped>
+.cardTitle {
+  padding-right: 64px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .loginContainer {
   display: flex;
   justify-content: center;

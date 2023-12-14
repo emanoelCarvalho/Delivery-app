@@ -1,19 +1,5 @@
 <template>
   <div class="container">
-    <div class="criacao">
-      <button @click="toggleInput('categoria')">Criar categoria</button>
-      <input v-if="mostrarInputCategoria" v-model="categoria.nome" placeholder="Nome da categoria">
-      <button v-if="mostrarInputCategoria" @click="salvarCategoria">Salvar Categoria</button>
-
-      <button @click="toggleInput('item')">Adicionar item</button>
-      <div v-if="mostrarInputItem">
-        <input v-model="item.name" placeholder="Nome do item">
-        <input v-model="item.itemDescription" placeholder="Descrição do item">
-        <input v-model="item.unitPrice" placeholder="Preço do item">
-        <input v-model="item.amount" placeholder="Quantidade do item">
-        <button @click="salvarItem">Salvar Item</button>
-      </div>
-    </div>
     <div class="categorias">
       <h3>Comida</h3>
       <v-divider :thickness="3" class="border-opacity-50" color="warning"></v-divider>
@@ -24,7 +10,7 @@
     <Chart :products="cartProducts" @product-remove="onProductRemove" />
   </div>
 </template>
-  
+
 <script>
 import axios from 'axios';
 import Header from './Header.vue';
@@ -50,20 +36,7 @@ export default {
         unitPrice: '',
         amount: '',
       },
-      products: [
-        {
-          id: 1,
-          name: 'Feijoada',
-          price: 19.90,
-          amount: 5,
-        },
-        {
-          id: 2,
-          name: 'Camarão na moranga',
-          price: 39.99,
-          amount: 5,
-        },
-      ],
+      products: [],
       cartProducts: [],
     };
   },
@@ -160,10 +133,6 @@ export default {
 };
 </script>
 <style scoped>
-.criacao {
-  margin-top: 35px;
-}
-
 .categorias {
   padding: 32px;
 }

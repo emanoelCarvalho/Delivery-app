@@ -5,16 +5,16 @@ export default {
     return {
       buttons: [
         {
-          text: 'Pedidos',
-          icon: 'mdi-cart',
-          route: '/pedidos',
+          text: 'Item',
+          icon: 'mdi-plus-thick',
+          route: '/registerItem',
         },
         {
-          text: 'Gestor',
-          icon: 'mdi-account-cog',
-          route: '/gestor',
+          text: 'Acompanhamento',
+          icon: 'mdi-plus-thick',
+          route: '/registerSideDish',
         },
-        {
+        /* {
           text: 'Análise',
           icon: 'mdi-chart-bar',
           route: '/analise',
@@ -28,7 +28,7 @@ export default {
           text: 'Configurações',
           icon: 'mdi-cog',
           route: '/configuracoes',
-        },
+        }, */
       ],
     };
   },
@@ -38,16 +38,17 @@ export default {
     },
     login() {
       this.$store.dispatch('setAdmin', true);
-    }
+    },
+    navigateToHome() {
+      this.$router.push('/');
+    },
   },
 }
 </script>
 
 <template>
   <div class="barranav">
-    <a href="/" class="logo-container">
-      <img src="../../public/logo.png" alt="logo" class="logomarca">
-    </a>
+    <img src="../../public/logo.png" alt="logo" class="logomarca" @click="navigateToHome">
     <div class="btn-container" v-if="$store.getters.isAdmin">
       <v-btn v-for="button in buttons" :key="button.route" :prepend-icon="button.icon" :to="button.route" text
         variant="tonal" color="white">
@@ -73,6 +74,7 @@ export default {
 .logomarca {
   max-width: 200px;
   max-height: 200px;
+  cursor: pointer;
 }
 
 .barranav {
@@ -88,11 +90,5 @@ export default {
 .btn-container {
   display: flex;
   gap: 8px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  height: 100%;
 }
 </style>

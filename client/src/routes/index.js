@@ -14,6 +14,16 @@ const router = createRouter({
       component: () => import("@/components/AdminLogin.vue"),
     },
     {
+      path: "/registerItem",
+      name: "registerItem",
+      component: () => import("@/components/ItemRegister.vue"),
+    },
+    {
+      path: "/registerSideDish",
+      name: "registerSideDish",
+      component: () => import("@/components/SideDishRegister.vue"),
+    },
+    {
       path: "/register",
       name: "register",
       component: () => import("@/view/Cadastro.vue"),
