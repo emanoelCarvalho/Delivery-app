@@ -42,11 +42,6 @@ try {
     through: ItemPedidoHasItem,
     onDelete: "cascade",
   });
-  Item.belongsTo(Acompanhamento, {})
-
-  // Acompanhamento
-
-  Acompanhamento.hasMany(Item, {});
 
   console.log("Relacionamentos definidos com sucesso");
 } catch (error) {

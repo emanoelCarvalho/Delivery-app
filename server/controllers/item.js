@@ -4,7 +4,7 @@ const { Item, Acompanhamento } = require("../models");
 class ItemController {
   async createItem(req, res) {
     try {
-      const { name, unitPrice, amount, category, itemDescription,AcompanhamentoId } = req.body;
+      const { name, unitPrice, amount, category, itemDescription } = req.body;
 
       const requiredFields = [
         name,
@@ -12,7 +12,6 @@ class ItemController {
         amount,
         category,
         itemDescription,
-        AcompanhamentoId,
       ];
 
       if (requiredFields.some((field) => !field)) {
@@ -25,7 +24,6 @@ class ItemController {
         amount,
         category,
         itemDescription,
-        AcompanhamentoId,
       });
 
       return res.status(201).json({
@@ -68,7 +66,7 @@ class ItemController {
   async updateItem(req, res) {
     try {
       const { id } = req.params;
-      const { name, unitPrice, amount, category, itemDescription, AcompanhamentoId } = req.body;
+      const { name, unitPrice, amount, category, itemDescription } = req.body;
 
       const requiredFields = [
         name,
@@ -76,7 +74,6 @@ class ItemController {
         amount,
         category,
         itemDescription,
-        AcompanhamentoId,
       ];
 
       if (requiredFields.some((field) => !field)) {
@@ -92,7 +89,6 @@ class ItemController {
           amount,
           category,
           itemDescription,
-          AcompanhamentoId,
         },
         {
           where: { id: id },
