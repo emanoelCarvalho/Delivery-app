@@ -1,10 +1,10 @@
-const { where } = require("sequelize");
-const { Item, Acompanhamento } = require("../models");
+const { where } = require("sequelize")
+const { Item, Acompanhamento } = require("../models")
 
 class ItemController {
   async createItem(req, res) {
     try {
-      const { name, unitPrice, amount, category, itemDescription } = req.body;
+      const { name, unitPrice, amount, category, itemDescription } = req.body
 
       const requiredFields = [
         name,
@@ -12,10 +12,10 @@ class ItemController {
         amount,
         category,
         itemDescription,
-      ];
+      ]
 
       if (requiredFields.some((field) => !field)) {
-        return res.status(400).json({ error: "Preencha todos os campos" });
+        return res.status(400).json({ error: "Preencha todos os campos" })
       }
 
       const newItem = await Item.create({
@@ -24,26 +24,24 @@ class ItemController {
         amount,
         category,
         itemDescription,
-      });
+      })
 
       return res.status(201).json({
         content: newItem.dataValues,
-      });
+      })
     } catch (error) {
-      console.log("Erro ao criar item: ", err);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      console.log("Erro ao criar item: ", error)
+      return res.status(500).json({ error: "Erro interno no servidor" })
     }
   }
 
   async getItems(req, res) {
     try {
-      const items = await Item.findAll({
-        include: [Acompanhamento],
-      });
-      return res.status(200).json({ items });
+      const items = await Item.findAll()
+      return res.status(200).json({ items })
     } catch (error) {
-      console.log("Erro ao encontrar o cardápio: ", error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      console.log("Erro ao encontrar o cardápio: ", error)
+      return res.status(500).json({ error: "Erro interno no servidor" })
     }
   }
 
@@ -51,22 +49,22 @@ class ItemController {
     try {
       const item = await Item.findByPk(req.params.id, {
         include: [Acompanhamento],
-      });
+      })
       if (item) {
-        return res.status(200).json({ item });
+        return res.status(200).json({ item })
       } else {
-        return res.status(404).json({ error: "Item não encontrado" });
+        return res.status(404).json({ error: "Item não encontrado" })
       }
     } catch (error) {
-      console.log("Erro ao buscar o item, verifique o ID: ", error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      console.log("Erro ao buscar o item, verifique o ID: ", error)
+      return res.status(500).json({ error: "Erro interno no servidor" })
     }
   }
 
   async updateItem(req, res) {
     try {
-      const { id } = req.params;
-      const { name, unitPrice, amount, category, itemDescription } = req.body;
+      const { id } = req.params
+      const { name, unitPrice, amount, category, itemDescription } = req.body
 
       const requiredFields = [
         name,
@@ -74,12 +72,12 @@ class ItemController {
         amount,
         category,
         itemDescription,
-      ];
+      ]
 
       if (requiredFields.some((field) => !field)) {
         return res
           .status(400)
-          .json({ error: "Preencha o campo para atualizar" });
+          .json({ error: "Preencha o campo para atualizar" })
       }
 
       await Item.update(
@@ -93,41 +91,41 @@ class ItemController {
         {
           where: { id: id },
         }
-      );
+      )
 
-      const updatedItem = await Item.findByPk(id);
+      const updatedItem = await Item.findByPk(id)
 
       return res
         .status(200)
-        .json({ message: "Cardápio atualizado com sucesso ", updatedItem });
+        .json({ message: "Cardápio atualizado com sucesso ", updatedItem })
     } catch (error) {
-      console.log("Erro ao atualizar item: ", error);
-      return res.status(500).json({ error: "Erro interno no servidor " });
+      console.log("Erro ao atualizar item: ", error)
+      return res.status(500).json({ error: "Erro interno no servidor " })
     }
   }
 
   async deleteItem(req, res) {
     try {
-      const { id } = req.params;
+      const { id } = req.params
 
-      const deletedItem = await Item.findByPk(id);
+      const deletedItem = await Item.findByPk(id)
 
       if (!deletedItem) {
-        return res.status(404).json({ message: "Item não encontrado" });
+        return res.status(404).json({ message: "Item não encontrado" })
       }
 
       await Item.destroy({
         where: { id: id },
-      });
+      })
 
       return res
         .status(200)
-        .json({ message: "Item deletado com sucesso ", deletedItem });
+        .json({ message: "Item deletado com sucesso ", deletedItem })
     } catch (error) {
-      console.log("Erro ao deletar item: ", error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      console.log("Erro ao deletar item: ", error)
+      return res.status(500).json({ error: "Erro interno no servidor" })
     }
   }
 }
 
-module.exports = new ItemController();
+module.exports = new ItemController()
