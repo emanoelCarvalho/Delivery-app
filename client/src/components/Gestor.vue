@@ -42,6 +42,7 @@ export default {
     return {
       mostrarInputCategoria: false,
       mostrarInputItem: false,
+      sideDishesOptions: [],
       categoria: {
         nome: '',
       },
@@ -56,46 +57,45 @@ export default {
           name: 'Feijoada',
           price: 19.90,
           amount: 5,
-          sideDishesOptions: [
-            {
-              id: 1,
-              name: 'Arroz',
-            },
-            {
-              id: 2,
-              name: 'Batata frita',
-            },
-            {
-              id: 3,
-              name: 'Farofa',
-            },
-          ],
         },
         {
           id: 2,
           name: 'Camarão na moranga',
           price: 39.99,
           amount: 5,
-          sideDishesOptions: [
-            {
-              id: 1,
-              name: 'Arroz',
-            },
-            {
-              id: 2,
-              name: 'Batata frita',
-            },
-            {
-              id: 3,
-              name: 'Farofa',
-            },
-          ],
         },
       ],
       cartProducts: [],
     };
   },
+  created() {
+    this.populateItems();
+  },
   methods: {
+    async populateItems() {
+      try {
+        await this.getAllItems();
+        await this.getAllSideDishes();
+      } catch (error) {
+        console.error('Erro ao buscar itens: ', error);
+      }
+    },
+    async getAllItems() {
+      const response = await axios.get('/item/getItems');
+      this.products = response.data.items.map(({ createdAt, updatedAt, unitPrice, itemDescription, ...rest }) => ({ ...rest, price: unitPrice, description: itemDescription }));
+    },
+    async getAllSideDishes() {
+      try {
+        const response = await axios.get('/acompanhamento/getAcompanhamentos');
+        this.sideDishesOptions = response.data.acompanhamentos.map(({ createdAt, updatedAt, ...rest }) => rest);
+        this.products = this.products.map(product => ({
+          ...product,
+          sideDishesOptions: this.sideDishesOptions,
+        }));
+      } catch (error) {
+        console.error('Erro ao buscar acompanhamentos: ', error);
+      }
+    },
     onProductRemove(index) {
       this.cartProducts.splice(index, 1);
     },

@@ -70,7 +70,7 @@ export default {
 </script>
 
 <template>
-  <v-card max-width="300px" height="fit-content" hover variant="flat" class="card" @click="open = true"
+  <v-card max-width="200px" height="fit-content" hover variant="flat" class="card" @click="open = true"
     :disabled="count === amount">
     <div class="product">
       <div class="product-image">
