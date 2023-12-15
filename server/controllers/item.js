@@ -47,8 +47,6 @@ class ItemController {
         { transaction: t }
       )
 
-      console.log(newItem)
-
       await t.commit()
 
       return res.status(201).json({
