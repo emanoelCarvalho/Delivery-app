@@ -18,11 +18,30 @@ export default {
       name: '',
       unitPrice: '',
       amount: '',
-      category: '',
       itemDescription: '',
       imageLink: '',
       loading: false,
+      category: null,
+      categories: [],
+      focused: false,
+      loadingCategories: true,
     }
+  },
+  mounted() {
+    this.$refs.autocomplete.addEventListener('keyup', (e) => {
+      if (e.keyCode !== 8) {
+        this.category = this.$refs.autocomplete.value;
+      } else {
+        if (this.category === null) {
+          this.$refs.autocomplete.value = '';
+        }
+      }
+    });
+    this.getCategories().then((categories) => {
+      this.categories = categories.sort((a, b) => a.name.localeCompare(b.name)).map((category) => category.name);
+    }).finally(() => {
+      this.loadingCategories = false;
+    });
   },
   methods: {
     async registerItem() {
@@ -45,6 +64,17 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    async getCategories() {
+      try {
+        const response = await axios.get('/category/getCategories');
+        if (response.status !== 200) {
+          throw new Error('Erro ao buscar categorias');
+        }
+        return response.data.categories;
+      } catch (error) {
+        console.error('Erro ao buscar categorias: ', error);
+      }
     }
   },
 }
@@ -59,7 +89,9 @@ export default {
         <v-form class="formContainer">
           <v-text-field v-model="name" label="Nome do item" hide-details></v-text-field>
           <v-text-field v-model="itemDescription" label="Descrição do item" hide-details></v-text-field>
-          <v-text-field v-model="category" label="Categoria" hide-details></v-text-field>
+          <v-autocomplete ref="autocomplete" v-model="category" label="Categoria" :loading="loadingCategories"
+            :disabled="loadingCategories" :items="categories" clearable persistent-clear hide-details
+            hide-no-data></v-autocomplete>
           <v-text-field v-model="imageLink" label="Link da imagem" hide-details></v-text-field>
           <v-text-field v-model="unitPrice" label="Preço unitário" hide-details type="number"></v-text-field>
           <v-text-field v-model="amount" label="Quantidade" hide-details type="number"></v-text-field>
