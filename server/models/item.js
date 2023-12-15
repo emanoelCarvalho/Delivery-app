@@ -26,6 +26,10 @@ Item.init(
       type: DataTypes.STRING,
       allowNull: true,
     }, 
+    isSpecial: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
     imageLink: {
       type: DataTypes.STRING,
       allowNull: false,

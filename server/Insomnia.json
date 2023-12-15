@@ -101,17 +101,7 @@
       "method": "PATCH",
       "body": {
         "mimeType": "application/json",
-        "text": {
-          "name": "Novo Nome",
-          "phoneNumber": "Novo Número",
-          "address": "Nova Endereço",
-          "email": "novoemail@example.com",
-          "password": "novasenha",
-          "cnpj": "Novo CNPJ",
-          "bank": "Novo Banco",
-          "agency": "Nova Agência",
-          "account": "Nova Conta"
-        }
+        "text": "{\"name\": \"Novo Nome\",\"phoneNumber\": \"987654321\",\"address\": \"Novo Endereço\",\"email\": \"novoemail@example.com\",\"password\": \"novasenha\",\"confirmPassword\": \"novasenha\",\"cnpj\": \"987654321\",\"bank\": \"Novo Banco\",\"agency\": \"4321\",\"account\": \"8765\"}"
       },
       "parameters": [],
       "headers": [
@@ -142,10 +132,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": {
-          "email": "admin@example.com",
-          "password": "adminpassword"
-        }
+        "text": "{\"email\": \"admin@example.com\", \"password\": \"adminpass\"}"
       },
       "parameters": [],
       "headers": [
@@ -337,7 +324,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\"name\": \"Nome do Item\", \"itemDescription\": \"Descrição do Item\", \"unitPrice\": 9.99, \"amount\": 10, \"category\": \"Categoria do Item\"}"
+        "text": "{\"name\": \"Nome do Item\", \"itemDescription\": \"Descrição do Item\", \"unitPrice\": 10.99, \"amount\": 10, isSpecial: false, \"imageLink\": \"https://www.google.com.br/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png\", \"CategoryId\": 1}"
       },
       "parameters": [],
       "headers": [
@@ -414,7 +401,7 @@
       "method": "PATCH",
       "body": {
         "mimeType": "application/json",
-        "text": "{\"name\": \"Novo Nome\", \"itemDescription\": \"Nova Descrição\", \"unitPrice\": 12.99, \"amount\": 15, \"category\": \"Nova Categoria\"}"
+        "text": "{\"name\": \"Novo Nome\", \"itemDescription\": \"Nova Descrição\", \"unitPrice\": 20.99, \"amount\": 20, isSpecial: true, \"imageLink\": \"https://www.google.com.br/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png\", \"CategoryId\": 1}"
       },
       "parameters": [],
       "headers": [
@@ -888,8 +875,8 @@
       "description": "Create a new Acompanhamento",
       "method": "POST",
       "body": {
-        "name": "Nome do Acompanhamento",
-        "amount": 10
+        "mimeType": "application/json",
+        "text": "{\"name\": \"Nome do Acompanhamento\", \"amount\": 10}"
       },
       "parameters": [],
       "headers": [],
@@ -903,7 +890,7 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
-    }, 
+    },
     {
       "_id": "req_get_acompanhamentos",
       "parentId": "wrk_delivery_routes",
@@ -926,7 +913,7 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
-    }, 
+    },
     {
       "_id": "req_get_acompanhamento_by_id",
       "parentId": "wrk_delivery_routes",
@@ -949,7 +936,7 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
-    }, 
+    },
     {
       "_id": "req_update_acompanhamento",
       "parentId": "wrk_delivery_routes",
@@ -960,8 +947,8 @@
       "description": "Update a specific Acompanhamento by ID",
       "method": "PATCH",
       "body": {
-        "name": "Novo Nome do Acompanhamento",
-        "amount": 20
+        "mimeType": "application/json",
+        "text": "{\"name\": \"Novo Nome\", \"amount\": 20}"
       },
       "parameters": [],
       "headers": [],
@@ -975,7 +962,7 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
-    }, 
+    },
     {
       "_id": "req_delete_acompanhamento",
       "parentId": "wrk_delivery_routes",
@@ -998,6 +985,137 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
-    }                    
+    }, 
+    {
+      "_id": "req_create_category",
+      "parentId": "wrk_delivery_routes",
+      "modified": 1681595830000,
+      "created": 1681595830000,
+        "url": "http://localhost:3000/category/createCategory",
+        "name": "Create Category",
+        "description": "Create a new category",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\"name\": \"Nome da Categoria\"}"
+        },
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_get_categories",
+        "parentId": "wrk_delivery_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/category/getCategories",
+        "name": "Get Categories",
+        "description": "Get a list of all categories",
+        "method": "GET",
+        "body": {},
+        "parameters": [],
+        "headers": [],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }, 
+      {
+        "_id": "req_delete_category",
+        "parentId": "wrk_delivery_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/category/deleteCategory/1",
+        "name": "Delete Category",
+        "description": "Delete a specific category by ID",
+        "method": "DELETE",
+        "body": {},
+        "parameters": [],
+        "headers": [],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }, 
+      {
+        "id": "req_create_loja",
+        "parentId": "wrk_delivery_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/loja/createLoja",
+        "name": "Create Loja",
+        "description": "Create a new loja",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\"status\": true}"
+        }, 
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }, 
+      {
+        "id": "req_get_lojas",
+        "parentId": "wrk_delivery_routes",
+        "modified": 1681595830000,
+        "created": 1681595830000,
+        "url": "http://localhost:3000/loja/getLojas",
+        "name": "Get Lojas",
+        "description": "Get a list of all lojas",
+        "method": "GET",
+        "body": {},
+        "parameters": [],
+        "headers": [],
+        "authentication": {},
+        "metaSortKey": -1681595830000,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      }     
   ]
 }
