@@ -25,11 +25,7 @@ Item.init(
     itemDescription: {
       type: DataTypes.STRING,
       allowNull: true,
-    },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    }, 
     imageLink: {
       type: DataTypes.STRING,
       allowNull: false,

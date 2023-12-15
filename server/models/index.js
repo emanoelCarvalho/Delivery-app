@@ -8,6 +8,7 @@ const ItemHasCardapio = require("./itemHasCardapio");
 const ItemPedidoHasItem = require("./itemPedidoHasItem");
 const Acompanhamento = require("./acompanhamento");
 const Category = require("./category");
+const Loja = require("./loja");
 
 const sequelize = require("../database/connection");
 
@@ -71,4 +72,6 @@ module.exports = {
   User,
   Item,
   Acompanhamento,
+  Category,
+  Loja, 
 };

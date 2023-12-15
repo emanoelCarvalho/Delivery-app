@@ -1,18 +1,18 @@
 const { where } = require("sequelize")
-const { Item, Acompanhamento } = require("../models")
+const { Item, Category } = require("../models")
 
 class ItemController {
   async createItem(req, res) {
     try {
-      const { name, unitPrice, amount, category, itemDescription, imageLink } = req.body
+      const { name, unitPrice, amount,  itemDescription, imageLink, CategoryId} = req.body
 
       const requiredFields = [
         name,
         unitPrice,
         amount,
-        category,
         itemDescription,
         imageLink,
+        CategoryId
       ]
 
       if (requiredFields.some((field) => !field)) {
@@ -23,9 +23,9 @@ class ItemController {
         name,
         unitPrice,
         amount,
-        category,
         itemDescription,
         imageLink,
+        CategoryId
       })
 
       return res.status(201).json({
@@ -39,7 +39,9 @@ class ItemController {
 
   async getItems(req, res) {
     try {
-      const items = await Item.findAll()
+      const items = await Item.findAll({
+        include: [Category],
+      })
       return res.status(200).json({ items })
     } catch (error) {
       console.log("Erro ao encontrar o cardápio: ", error)
@@ -50,7 +52,7 @@ class ItemController {
   async getItemById(req, res) {
     try {
       const item = await Item.findByPk(req.params.id, {
-        include: [Acompanhamento],
+        include: [Category],
       })
       if (item) {
         return res.status(200).json({ item })
@@ -66,15 +68,15 @@ class ItemController {
   async updateItem(req, res) {
     try {
       const { id } = req.params
-      const { name, unitPrice, amount, category, itemDescription, imageLink } = req.body
+      const { name, unitPrice, amount,  itemDescription, imageLink, CategoryId } = req.body
 
       const requiredFields = [
         name,
         unitPrice,
         amount,
-        category,
         itemDescription,
         imageLink,
+        CategoryId
       ]
 
       if (requiredFields.some((field) => !field)) {
@@ -88,9 +90,9 @@ class ItemController {
           name,
           unitPrice,
           amount,
-          category,
           itemDescription,
           imageLink,
+          CategoryId
         },
         {
           where: { id: id },
