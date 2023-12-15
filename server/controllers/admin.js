@@ -217,6 +217,36 @@ class AdminController {
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
+  async updateStatus(req, res) {
+    try {
+      const { id } = req.params;
+
+      const admin = await Admin.findByPk(id);
+
+      if (!admin) {
+        return res.status(404).json({ error: "Admin não encontrado" });
+      }
+
+      await Admin.update(
+        {
+          alterStatus: true,
+        },
+        {
+          where: { id },
+        }
+      );
+
+      const updatedAdmin = await Admin.findByPk(id);
+
+      return res.status(200).json({
+        message: "Status atualizado com sucesso",
+        updatedAdmin,
+      });
+    } catch (error) {
+      console.error("Erro ao atualizar status: ", error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
+    }
+  }
 }
 
 module.exports = new AdminController();

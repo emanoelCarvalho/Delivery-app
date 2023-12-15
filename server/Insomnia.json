@@ -183,6 +183,38 @@
       "_type": "request"
     },
     {
+      "_id": "req_update_status",
+      "parentId": "wrk_delivery_routes",
+      "modified": 1681595830000,
+      "created": 1681595830000,
+      "url": "http://localhost:3000/admin/updateStatus/1",
+      "name": "Update Status",
+      "description": "Update status of the shop",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"status\": true}"
+      },
+      "parameters": [
+        {
+          "name": "adminId",
+          "value": "1",
+          "id": "param_adminId",
+          "type": "string"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1681595830000,
+      "isPrivate": true,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": false,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
       "_id": "req_create_cardapio",
       "parentId": "wrk_delivery_routes",
       "modified": 1681595830000,
@@ -985,137 +1017,83 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
-    }, 
+    },
     {
       "_id": "req_create_category",
       "parentId": "wrk_delivery_routes",
       "modified": 1681595830000,
       "created": 1681595830000,
-        "url": "http://localhost:3000/category/createCategory",
-        "name": "Create Category",
-        "description": "Create a new category",
-        "method": "POST",
-        "body": {
-          "mimeType": "application/json",
-          "text": "{\"name\": \"Nome da Categoria\"}"
-        },
-        "parameters": [],
-        "headers": [
-          {
-            "name": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "authentication": {},
-        "metaSortKey": -1681595830000,
-        "isPrivate": false,
-        "settingStoreCookies": true,
-        "settingSendCookies": true,
-        "settingDisableRenderRequestBody": false,
-        "settingEncodeUrl": true,
-        "settingRebuildPath": true,
-        "settingFollowRedirects": "global",
-        "_type": "request"
+      "url": "http://localhost:3000/category/createCategory",
+      "name": "Create Category",
+      "description": "Create a new category",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"name\": \"Nome da Categoria\"}"
       },
-      {
-        "_id": "req_get_categories",
-        "parentId": "wrk_delivery_routes",
-        "modified": 1681595830000,
-        "created": 1681595830000,
-        "url": "http://localhost:3000/category/getCategories",
-        "name": "Get Categories",
-        "description": "Get a list of all categories",
-        "method": "GET",
-        "body": {},
-        "parameters": [],
-        "headers": [],
-        "authentication": {},
-        "metaSortKey": -1681595830000,
-        "isPrivate": false,
-        "settingStoreCookies": true,
-        "settingSendCookies": true,
-        "settingDisableRenderRequestBody": false,
-        "settingEncodeUrl": true,
-        "settingRebuildPath": true,
-        "settingFollowRedirects": "global",
-        "_type": "request"
-      }, 
-      {
-        "_id": "req_delete_category",
-        "parentId": "wrk_delivery_routes",
-        "modified": 1681595830000,
-        "created": 1681595830000,
-        "url": "http://localhost:3000/category/deleteCategory/1",
-        "name": "Delete Category",
-        "description": "Delete a specific category by ID",
-        "method": "DELETE",
-        "body": {},
-        "parameters": [],
-        "headers": [],
-        "authentication": {},
-        "metaSortKey": -1681595830000,
-        "isPrivate": false,
-        "settingStoreCookies": true,
-        "settingSendCookies": true,
-        "settingDisableRenderRequestBody": false,
-        "settingEncodeUrl": true,
-        "settingRebuildPath": true,
-        "settingFollowRedirects": "global",
-        "_type": "request"
-      }, 
-      {
-        "id": "req_create_loja",
-        "parentId": "wrk_delivery_routes",
-        "modified": 1681595830000,
-        "created": 1681595830000,
-        "url": "http://localhost:3000/loja/createLoja",
-        "name": "Create Loja",
-        "description": "Create a new loja",
-        "method": "POST",
-        "body": {
-          "mimeType": "application/json",
-          "text": "{\"status\": true}"
-        }, 
-        "parameters": [],
-        "headers": [
-          {
-            "name": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "authentication": {},
-        "metaSortKey": -1681595830000,
-        "isPrivate": false,
-        "settingStoreCookies": true,
-        "settingSendCookies": true,
-        "settingDisableRenderRequestBody": false,
-        "settingEncodeUrl": true,
-        "settingRebuildPath": true,
-        "settingFollowRedirects": "global",
-        "_type": "request"
-      }, 
-      {
-        "id": "req_get_lojas",
-        "parentId": "wrk_delivery_routes",
-        "modified": 1681595830000,
-        "created": 1681595830000,
-        "url": "http://localhost:3000/loja/getLojas",
-        "name": "Get Lojas",
-        "description": "Get a list of all lojas",
-        "method": "GET",
-        "body": {},
-        "parameters": [],
-        "headers": [],
-        "authentication": {},
-        "metaSortKey": -1681595830000,
-        "isPrivate": false,
-        "settingStoreCookies": true,
-        "settingSendCookies": true,
-        "settingDisableRenderRequestBody": false,
-        "settingEncodeUrl": true,
-        "settingRebuildPath": true,
-        "settingFollowRedirects": "global",
-        "_type": "request"
-      }     
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1681595830000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_categories",
+      "parentId": "wrk_delivery_routes",
+      "modified": 1681595830000,
+      "created": 1681595830000,
+      "url": "http://localhost:3000/category/getCategories",
+      "name": "Get Categories",
+      "description": "Get a list of all categories",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1681595830000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_category",
+      "parentId": "wrk_delivery_routes",
+      "modified": 1681595830000,
+      "created": 1681595830000,
+      "url": "http://localhost:3000/category/deleteCategory/1",
+      "name": "Delete Category",
+      "description": "Delete a specific category by ID",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1681595830000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }
   ]
 }

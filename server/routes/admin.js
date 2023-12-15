@@ -6,7 +6,9 @@ router.post("/novoAdmin", AdminController.createAdmin);
 router.get("/listarAdmins", AdminController.getAdmins);
 router.get("/getAdminById/:id", AdminController.getAdminById);
 router.patch("/updateAdmin/:id", AdminController.updateAdmin);
+router.patch("/updateStatus/:id", AdminController.updateStatus);
 router.delete("/deleteAdmin/:id", AdminController.deleteAdmin);
+
 
 router.post("/login", AdminController.loginAdmin);
 

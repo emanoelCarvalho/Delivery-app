@@ -52,6 +52,10 @@ Admin.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    alterStatus: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize,
