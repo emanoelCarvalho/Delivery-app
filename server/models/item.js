@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../database/connection");
+const { Model, DataTypes } = require("sequelize")
+const sequelize = require("../database/connection")
 
 class Item extends Model {}
 
@@ -25,10 +25,10 @@ Item.init(
     itemDescription: {
       type: DataTypes.STRING,
       allowNull: true,
-    }, 
+    },
     isSpecial: {
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      defaultValue: false,
     },
     imageLink: {
       type: DataTypes.STRING,
@@ -40,6 +40,6 @@ Item.init(
     modelName: "Item",
     freezeTableName: true,
   }
-);
+)
 
-module.exports = Item;
+module.exports = Item
