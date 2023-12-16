@@ -5,22 +5,26 @@ export default createStore({
   plugins: [createPersistedState()],
   state: {
     isAdmin: false,
-    // outros estados aqui
+    storeStatus: false,
   },
   mutations: {
     SET_ADMIN(state, payload) {
       state.isAdmin = payload
     },
-    // outras mutações aqui
+    SET_STORE_STATUS(state, payload) {
+      state.storeStatus = payload
+    },
   },
   actions: {
     setAdmin({ commit }, payload) {
       commit("SET_ADMIN", payload)
     },
-    // outras ações aqui
+    setStoreStatus({ commit }, payload) {
+      commit("SET_STORE_STATUS", payload)
+    },
   },
   getters: {
     isAdmin: (state) => state.isAdmin,
-    // outros getters aqui
+    storeStatus: (state) => state.storeStatus,
   },
 })

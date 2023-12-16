@@ -217,11 +217,10 @@ class AdminController {
       return res.status(500).json({ error: "Erro interno no servidor" })
     }
   }
+
   async updateStatus(req, res) {
     try {
-      const { id } = req.params
-      const { alterStatus } = req.body
-      console.log(req.body)
+      const { alterStatus, id } = req.body
 
       const admin = await Admin.findByPk(id)
 
@@ -229,13 +228,18 @@ class AdminController {
         return res.status(404).json({ error: "Admin não encontrado" })
       }
 
-      admin.alterStatus = alterStatus
-      const updatedAdmin = await admin.save()
+      await Admin.update(
+        {
+          alterStatus,
+        },
+        {
+          where: { id },
+        }
+      )
 
-      return res.status(200).json({
-        message: "Status atualizado com sucesso",
-        updatedAdmin,
-      })
+      return res
+        .status(200)
+        .json({ message: "Status atualizado com sucesso", alterStatus })
     } catch (error) {
       console.error("Erro ao atualizar status: ", error)
       return res.status(500).json({ error: "Erro interno no servidor" })

@@ -8,6 +8,7 @@
       </div>
     </div>
     <Chart :products="cartProducts" @product-remove="onProductRemove" />
+    <Settings />
   </div>
 </template>
 
@@ -16,12 +17,14 @@ import axios from 'axios';
 import Header from './Header.vue';
 import Product from './Product.vue';
 import Chart from './Chart.vue';
+import Settings from './Settings.vue';
 
 export default {
   components: {
     Header,
     Product,
     Chart,
+    Settings,
   },
   data() {
     return {

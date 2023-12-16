@@ -1,12 +1,18 @@
 <script>
 import { EventBus } from '@/lib/eventBus';
+import axios from 'axios';
 
 export default {
   name: 'Chart',
   data() {
     return {
       open: false,
+      status: this.$store.getters.storeStatus,
+      loading: false,
     };
+  },
+  mounted() {
+    this.getStoreStatus();
   },
   props: {
     products: {
@@ -24,17 +30,44 @@ export default {
       if (this.products.length === 0) {
         this.open = false;
       }
-    }
+    },
+    async finishPurchase() {
+      this.loading = true;
+      try {
+        await this.getStoreStatus();
+        if (!this.status) {
+          throw new Error('Loja fechada');
+        }
+      } catch (error) {
+        console.error('Erro ao finalizar compra: ', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async getStoreStatus() {
+      try {
+        const response = await axios.get('/admin/getStatus/1');
+        this.status = response.data.alterStatus;
+        this.$store.dispatch('setStoreStatus', this.status);
+      } catch (error) {
+        console.error('Erro ao buscar status da loja: ', error);
+      } finally {
+        this.loading = false;
+      }
+    },
   },
   emits: ['productRemove'],
 }
 
 </script>
 <template>
-  <v-btn :disabled="this.products.length === 0 || $store.getters.isAdmin" class="cartButton" @click="openChart"
+  <v-btn v-if="!$store.getters.isAdmin" :disabled="this.products.length === 0" class="cartButton" @click="openChart"
     icon="mdi-cart" color="green"></v-btn>
   <v-dialog v-model="open" max-width="500px">
     <v-card title="Carrinho" prepend-icon="mdi-cart-outline">
+      <v-card-subtitle v-if="!status">
+        <p>No momento a loja está fechada. Tente mais tarde!</p>
+      </v-card-subtitle>
       <v-card-text>
         <v-list>
           <v-list-item v-for="(product, index) in products" :key="index">
@@ -63,7 +96,9 @@ export default {
       <v-card-actions>
         <v-btn color="blue darken-1" text @click="open = false">Adicionar mais itens</v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text>Finalizar compra</v-btn>
+        <v-btn color="green darken-1" text @click="finishPurchase" :loading="loading"
+          :disabled="loading || !status">Finalizar
+          compra</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

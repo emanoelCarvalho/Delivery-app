@@ -23,6 +23,11 @@ const router = createRouter({
       name: "registerSideDish",
       component: () => import("@/components/SideDishRegister.vue"),
     },
+    {
+      path: "/store",
+      name: "store",
+      component: () => import("@/components/Store.vue"),
+    },
   ],
 })
 
