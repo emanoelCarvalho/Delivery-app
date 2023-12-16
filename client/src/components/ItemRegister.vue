@@ -20,6 +20,7 @@ export default {
       amount: '',
       itemDescription: '',
       imageLink: '',
+      isSpecial: false,
       loading: false,
       category: null,
       categories: [],
@@ -54,6 +55,7 @@ export default {
           category: this.category,
           itemDescription: this.itemDescription,
           imageLink: this.imageLink,
+          isSpecial: this.isSpecial,
         });
         if (response.status !== 201) {
           throw new Error('Erro ao cadastrar item');
@@ -95,6 +97,10 @@ export default {
           <v-text-field v-model="imageLink" label="Link da imagem" hide-details></v-text-field>
           <v-text-field v-model="unitPrice" label="Preço unitário" hide-details type="number"></v-text-field>
           <v-text-field v-model="amount" label="Quantidade" hide-details type="number"></v-text-field>
+          <v-checkbox v-model="isSpecial" label="Produto especial" hide-details density="compact">
+            <v-tooltip activator="parent" location="bottom">Esse checkbox indica que o prato em questão já
+              possui todos os acompanhamentos não sendo possível modificá-los</v-tooltip>
+          </v-checkbox>
         </v-form>
       </v-card-text>
       <v-card-actions>

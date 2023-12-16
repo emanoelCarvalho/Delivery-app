@@ -1,13 +1,14 @@
 <template>
   <div class="container">
-    <div class="categorias">
-      <h3>Comida</h3>
+    <div class="categorias" v-for="(category, index) in finalProducts" :key="index">
+      <h3 v-if="category.products.length > 0">{{ category.category.name }}</h3>
       <v-divider :thickness="3" class="border-opacity-50" color="warning"></v-divider>
       <div class="products">
-        <Product v-for="product in products" :key="product.name" v-bind="product" @product-add="onProductAdd" />
+        <Product v-for="product in category.products" :key="product.name" v-bind="product" @product-add="onProductAdd"
+          @product-deleted="populateItems" />
       </div>
     </div>
-    <Chart :products="cartProducts" @product-remove="onProductRemove" />
+    <Chart :products="cartProducts" @product-remove="onProductRemovedFromChart" />
     <Settings />
   </div>
 </template>
@@ -41,23 +42,47 @@ export default {
       },
       products: [],
       cartProducts: [],
+      categories: [],
+      finalProducts: [],
     };
   },
   created() {
     this.populateItems();
   },
   methods: {
+    async getAllCategories() {
+      try {
+        const response = await axios.get('/category/getCategories');
+        this.categories = response.data.categories;
+      } catch (error) {
+        console.error('Erro ao buscar categorias: ', error);
+      }
+    },
     async populateItems() {
       try {
         await this.getAllItems();
         await this.getAllSideDishes();
+        await this.getAllCategories();
+
+        for (let i = 0; i < this.categories.length; i++) {
+          const category = this.categories[i];
+          const products = this.products.filter(product => product.CategoryId === category.id);
+          this.finalProducts.push({
+            category,
+            products,
+          });
+        }
       } catch (error) {
         console.error('Erro ao buscar itens: ', error);
       }
     },
     async getAllItems() {
       const response = await axios.get('/item/getItems');
-      this.products = response.data.items.map(({ createdAt, updatedAt, unitPrice, itemDescription, ...rest }) => ({ ...rest, price: unitPrice, description: itemDescription }));
+      this.products = response
+        .data
+        .items
+        .map(({ createdAt, updatedAt, unitPrice, itemDescription, ...rest }) => ({ ...rest, price: unitPrice, description: itemDescription }))
+        .sort((a, b) => a.CategoryId - b.CategoryId);
     },
     async getAllSideDishes() {
       try {
@@ -71,73 +96,18 @@ export default {
         console.error('Erro ao buscar acompanhamentos: ', error);
       }
     },
-    onProductRemove(index) {
+    onProductRemovedFromChart(index) {
       this.cartProducts.splice(index, 1);
     },
     onProductAdd(product) {
       this.cartProducts.push(product);
-    },
-    toggleInput(tipo) {
-      // Resetar valores e alternar a visibilidade do input
-      if (tipo === 'categoria') {
-        this.mostrarInputCategoria = !this.mostrarInputCategoria;
-        this.categoria.nome = '';
-      } else if (tipo === 'item') {
-        this.mostrarInputItem = !this.mostrarInputItem;
-        this.item = {
-          name: '',
-          itemDescription: '',
-          unitPrice: '',
-          amount: '',
-        };
-      }
-    },
-    async salvarCategoria() {
-      try {
-        if (this.categoria.nome === '') {
-          alert('Preencha o nome da categoria antes de salvar');
-          return;
-        }
-
-        const response = await axios.post('http://localhost:3000/categoria/criarCategoria', this.categoria);
-
-        console.log('Categoria criada com sucesso: ', response.data);
-        // Reinicializar estado após salvar
-        this.mostrarInputCategoria = false;
-        this.categoria.nome = '';
-      } catch (error) {
-        console.error('Erro ao realizar a criação de categoria: ', error);
-      }
-    },
-    async salvarItem() {
-      try {
-        // Validar se todos os campos do item estão preenchidos
-        if (Object.values(this.item).some(value => value === '')) {
-          alert('Preencha todos os campos do item para adicioná-lo.');
-          return;
-        }
-
-        const response = await axios.post('http://localhost:3000/item/createItem', this.item);
-
-        console.log('Item adicionado com sucesso: ', response.data);
-        // Reinicializar estado após salvar
-        this.mostrarInputItem = false;
-        this.item = {
-          name: '',
-          itemDescription: '',
-          unitPrice: '',
-          amount: '',
-        };
-      } catch (error) {
-        console.error('Erro ao realizar a criação do item: ', error);
-      }
     },
   },
 };
 </script>
 <style scoped>
 .categorias {
-  padding: 32px;
+  padding: 32px 32px 0 32px;
 }
 
 .products {

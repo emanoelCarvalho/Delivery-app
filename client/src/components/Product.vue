@@ -1,5 +1,6 @@
 <script>
 import { EventBus } from '@/lib/eventBus';
+import axios from 'axios';
 
 export default {
   name: 'Product',
@@ -8,6 +9,7 @@ export default {
       count: 0,
       open: false,
       sideDishes: [],
+      loading: false,
     };
   },
   props: {
@@ -37,8 +39,12 @@ export default {
     sideDishesOptions: {
       type: Array,
     },
-    category: {
-      type: String,
+    isSpecial: {
+      type: Boolean,
+      default: false,
+    },
+    CategoryId: {
+      type: Number,
       required: true,
     },
   },
@@ -46,7 +52,7 @@ export default {
     EventBus.on('product-removed', this.onProductRemoved);
   },
   beforeUnmount() {
-    EventBus.off('product-removed', this.onProductRemoved);
+    EventBus.off('product-deleted', this.onProductRemoved);
   },
   methods: {
     onProductRemoved(productId) {
@@ -71,9 +77,23 @@ export default {
         this.emitProduct();
         this.sideDishes = [];
       }
-    }
+    },
+    async deleteItem() {
+      this.loading = true;
+      try {
+        const response = await axios.delete(`/item/deleteItem/${this.id}`);
+        if (response.status === 200) {
+          this.open = false;
+          this.$emit('productDeleted');
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
+    },
   },
-  emits: ['productAdd'],
+  emits: ['productAdd', 'productDeleted'],
 }
 </script>
 
@@ -93,7 +113,7 @@ export default {
   <v-dialog v-model="open" max-width="500px">
     <v-card :title="name" :subtitle="description">
       <v-card-text>
-        <v-container fluid>
+        <v-container fluid v-if="!isSpecial">
           <div v-for="sideDish in sideDishesOptions" :key="sideDish.id" class="sideDishNameContainer">
             <p>{{ sideDish.name }}</p>
             <div>
@@ -105,6 +125,8 @@ export default {
       </v-card-text>
       <v-card-actions>
         <v-btn color="red darken-1" text @click="open = false">Cancelar</v-btn>
+        <v-btn prepend-icon="mdi-delete" v-if="$store.getters.isAdmin" variant="flat" @click="deleteItem"
+          :loading="loading" :disabled="loading">Remover item</v-btn>
         <v-spacer></v-spacer>
         <v-btn :disabled="$store.getters.isAdmin" color="green darken-1" @click="add" text>Adicionar - R$ {{
           price.toFixed(2)

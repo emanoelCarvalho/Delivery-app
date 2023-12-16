@@ -38,6 +38,13 @@ export default {
         if (!this.status) {
           throw new Error('Loja fechada');
         }
+
+        window.open('https://wa.me/+5581993255461?text=Olá,%20gostaria%20de%20fazer%20um%20pedido%20com%20os%20seguintes%20itens:%0A' + this.products.map((product) => {
+          const sideDishes = product.sideDishes.map((sideDish) => {
+            return product.sideDishesOptions.find((option) => option.id === sideDish).name;
+          });
+          return `${product.name} - ${sideDishes.join(', ')}`;
+        }).join('%0A') + '%0A%0A*Total:*%20R$%20' + this.products.reduce((acc, product) => acc + product.price, 0).toFixed(2), '_blank');
       } catch (error) {
         console.error('Erro ao finalizar compra: ', error);
       } finally {
@@ -97,15 +104,14 @@ export default {
         <v-btn color="blue darken-1" text @click="open = false">Adicionar mais itens</v-btn>
         <v-spacer></v-spacer>
         <v-btn color="green darken-1" text @click="finishPurchase" :loading="loading"
-          :disabled="loading || !status">Finalizar
-          compra</v-btn>
+          :disabled="loading || !status">Finalizar compra</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 <style scoped>
 .cartButton {
-  position: absolute;
+  position: fixed;
   bottom: 16px;
   right: 16px;
 }

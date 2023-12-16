@@ -30,7 +30,7 @@ export default {
 </template>
 <style scoped>
 .addButton {
-  position: absolute;
+  position: fixed;
   bottom: 16px;
   right: 16px;
 }
