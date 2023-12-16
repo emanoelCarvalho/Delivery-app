@@ -43,7 +43,7 @@ export default {
           const sideDishes = product.sideDishes.map((sideDish) => {
             return product.sideDishesOptions.find((option) => option.id === sideDish).name;
           });
-          return `${product.name} - ${sideDishes.join(', ')}`;
+          return `*${product.name}*${sideDishes.length > 0 ? ' - ' : ''}${sideDishes.join(', ')}`;
         }).join('%0A') + '%0A%0A*Total:*%20R$%20' + this.products.reduce((acc, product) => acc + product.price, 0).toFixed(2), '_blank');
       } catch (error) {
         console.error('Erro ao finalizar compra: ', error);
