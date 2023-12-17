@@ -49,6 +49,7 @@ export default {
   created() {
     this.populateItems();
   },
+  
   methods: {
     async getAllCategories() {
       try {
@@ -63,6 +64,7 @@ export default {
         await this.getAllItems();
         await this.getAllSideDishes();
         await this.getAllCategories();
+        this.finalProducts = [];
 
         for (let i = 0; i < this.categories.length; i++) {
           const category = this.categories[i];
