@@ -18,19 +18,19 @@ Este projeto foi idealizado e implementado por:
 - PO & participação Breve do Back-end
 
 ### [Emanoel Carvalho](https://www.linkedin.com/in/emanoelCarvalho/) | [GitHub](https://github.com/emanoelCarvalho/)
--Development Team & Back-end
+- Development Team & Back-end
 
 ### [Wilder Carvalho](https://www.linkedin.com/in/wilder-carvalho/) | [GitHub](http://github.com/wcarvalho98/)
-- Back end
+- Full Stack Developer
 
 ### [Gabriel Vinicius](link_para_o_linkedin) | [GitHub](link_para_o_github)
 - Development Team & DBA
 
 ### [Gean de Lima](link_para_o_linkedin) | [GitHub](link_para_o_github)
--Development Team & Front-end
+- Development Team & Front-end
 
 ### [Cleiton Lucas](link_para_o_linkedin) | [GitHub](link_para_o_github)
--Development Team & Front-end
+- Development Team & Front-end
 
 ## Instalação e Uso
 
