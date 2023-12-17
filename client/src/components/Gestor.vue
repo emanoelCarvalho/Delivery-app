@@ -1,11 +1,13 @@
 <template>
   <div class="container">
-    <div class="categorias" v-for="(category, index) in finalProducts" :key="index">
-      <h3 v-if="category.products.length > 0">{{ category.category.name }}</h3>
-      <v-divider :thickness="3" class="border-opacity-50" color="warning"></v-divider>
-      <div class="products">
-        <Product v-for="product in category.products" :key="product.name" v-bind="product" @product-add="onProductAdd"
-          @product-deleted="populateItems" />
+    <div v-for="(category, index) in finalProducts" :key="index">
+      <div class="categorias" v-if="category.products.length > 0">
+        <h3>{{ category.category.name }}</h3>
+        <v-divider :thickness="3" class="border-opacity-50" color="warning"></v-divider>
+        <div class="products">
+          <Product v-for="product in category.products" :key="product.name" v-bind="product" @product-add="onProductAdd"
+            @product-deleted="populateItems" />
+        </div>
       </div>
     </div>
     <Chart :products="cartProducts" @product-remove="onProductRemovedFromChart" />
@@ -49,7 +51,7 @@ export default {
   created() {
     this.populateItems();
   },
-  
+
   methods: {
     async getAllCategories() {
       try {
