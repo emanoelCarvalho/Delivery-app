@@ -4,7 +4,7 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objet
 
 ## Tecnologias Utilizadas
 
-- Vue.js
+- ![](/src/lib/vue.png)
 - Node.js
 - Axios
 - Sequelize
