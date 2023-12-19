@@ -14,23 +14,22 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto de desenvolvim
 
 Este projeto foi idealizado e implementado por:
 
-
-### [Emanoel Carvalho](https://www.linkedin.com/in/emanoelCarvalho/) | [GitHub](https://github.com/emanoelCarvalho/)
+### [Emanoel Carvalho](https://www.linkedin.com/in/emanoelCarvalho/) | [![GitHub](https://img.shields.io/badge/GitHub-emanoelCarvalho-181717?logo=github)](https://github.com/emanoelCarvalho/)
 - Development Team & Back-end
 
-### [Wilder Carvalho](https://www.linkedin.com/in/wilder-carvalho/) | [GitHub](http://github.com/wcarvalho98/)
+### [Wilder Carvalho](https://www.linkedin.com/in/wilder-carvalho/) | [![GitHub](https://img.shields.io/badge/GitHub-wcarvalho98-181717?logo=github)](http://github.com/wcarvalho98/)
 - Full Stack Developer
 
-### [Gilvan Paes](https://www.linkedin.com/in/gilvan-p-920631141/) | [GitHub](https://github.com/Gvjunior)
+### [Gilvan Paes](https://www.linkedin.com/in/gilvan-p-920631141/) | [![GitHub](https://img.shields.io/badge/GitHub-Gvjunior-181717?logo=github)](https://github.com/Gvjunior)
 - PO & participação Breve do Back-end
 
-### [Gabriel Vinicius]([https://www.linkedin.com/in/gabriel-vinicius-4b7b96254]) | [GitHub](https://github.com/Gabxxxx)
+### [Gabriel Vinicius](https://www.linkedin.com/in/gabriel-vinicius-4b7b96254) | [![GitHub](https://img.shields.io/badge/GitHub-Gabxxxx-181717?logo=github)](https://github.com/Gabxxxx)
 - Development Team & DBA
 
-### [Gean de Lima](link_para_o_linkedin) | [GitHub](https://github.com/Foccuns169)
+### [Gean de Lima](https://github.com/Foccuns169) | [![GitHub](https://img.shields.io/badge/GitHub-Foccuns169-181717?logo=github)](https://github.com/Foccuns169)
 - Development Team & Front-end
 
-### [Cleiton Lucas](link_para_o_linkedin) | [GitHub](https://github.com/CleitonLucas)
+### [Cleiton Lucas](https://github.com/CleitonLucas) | [![GitHub](https://img.shields.io/badge/GitHub-CleitonLucas-181717?logo=github)](https://github.com/CleitonLucas)
 - Development Team & Front-end
 
 ## Instalação e Uso
