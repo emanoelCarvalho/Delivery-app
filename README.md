@@ -1,10 +1,10 @@
 # Delivery-App - Projeto de Disciplina
 
-Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objetivo de melhorar o estabelecimento e facilitar a entrega de pedidos. No futuro, planejamos oferecer essa solução para outros estabelecimentos interessados. Foi -se implementado a metodologia Scrum para esse projeto.
+Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objetivo de melhorar o estabelecimento e facilitar a entrega de pedidos. No futuro, planejamos oferecer essa solução para outros estabelecimentos interessados. Foi-se implementado a metodologia Scrum para esse projeto.
 
 ## Tecnologias Utilizadas
 
-- ![]([https://e7.pngegg.com/pngimages/436/593/png-clipart-vue-js-logo-landscape-tech-companies-thumbnail.png](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1184px-Vue.js_Logo_2.svg.png))
+- ![](https://banner2.cleanpng.com/20180407/qcq/kisspng-vue-js-javascript-framework-front-and-back-ends-gi-technical-5ac9109e8adb43.6860172915231264305688.jpg)
 - Node.js
 - Axios
 - Sequelize
