@@ -4,11 +4,12 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objet
 
 ## Tecnologias Utilizadas
 
-- Vue.js
-- Node.js
-- Axios
-- Sequelize
-- Vuetify
+- ![Vue.js](https://vuejs.org/images/logo.png) Vue.js
+- ![Node.js](https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg) Node.js
+- ![Axios](https://github.com/axios/axios/raw/master/assets/axios_logo_transparent.png) Axios
+- ![Sequelize](https://raw.githubusercontent.com/sequelize/sequelize/master/docs/logo.png) Sequelize
+- ![Vuetify](https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-300.png) Vuetify
+
 
 ## Criadores
 
