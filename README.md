@@ -4,7 +4,7 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objet
 
 ## Tecnologias Utilizadas
 
-- ![](/src/lib/vue.png)
+- ![](https://e7.pngegg.com/pngimages/436/593/png-clipart-vue-js-logo-landscape-tech-companies-thumbnail.png)
 - Node.js
 - Axios
 - Sequelize
