@@ -7,6 +7,6 @@ vendor/
 /server/.env
 
 /client/node_modules/
-/client/README.md
+
 
 /server/node_modules/
