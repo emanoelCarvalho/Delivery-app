@@ -1,14 +1,14 @@
 # Delivery-App - Projeto de Disciplina
 
-Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objetivo de melhorar o estabelecimento e facilitar a entrega de pedidos. No futuro, planejamos oferecer essa solução para outros estabelecimentos interessados. Foi -se implementado a metodologia Scrum para esse projeto.
+Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objetivo de melhorar o estabelecimento e facilitar a entrega de pedidos. No futuro, planejamos oferecer essa solução para outros estabelecimentos interessados. Foi-se implementado a metodologia Scrum para esse projeto.
 
 ## Tecnologias Utilizadas
 
-- ![Vue.js](https://vuejs.org/images/logo.png) Vue.js
-- ![Node.js](https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg) Node.js
-- ![Axios](https://github.com/axios/axios/raw/master/assets/axios_logo_transparent.png) Axios
-- ![Sequelize](https://raw.githubusercontent.com/sequelize/sequelize/master/docs/logo.png) Sequelize
-- ![Vuetify](https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-300.png) Vuetify
+- Vue.js
+- Node.js
+- Axios
+- Sequelize
+- Vuetify
 
 ## Criadores
 
@@ -23,13 +23,13 @@ Este projeto foi idealizado e implementado por:
 ### [Wilder Carvalho](https://www.linkedin.com/in/wilder-carvalho/) | [GitHub](http://github.com/wcarvalho98/)
 - Full Stack Developer
 
-### [Gabriel Vinicius](link_para_o_linkedin) | [GitHub](link_para_o_github)
+### [Gabriel Vinicius]([https://www.linkedin.com/in/gabriel-vinicius-4b7b96254]) | [GitHub](https://github.com/Gabxxxx)
 - Development Team & DBA
 
-### [Gean de Lima](link_para_o_linkedin) | [GitHub](link_para_o_github)
+### [Gean de Lima](link_para_o_linkedin) | [GitHub](https://github.com/Foccuns169)
 - Development Team & Front-end
 
-### [Cleiton Lucas](link_para_o_linkedin) | [GitHub](link_para_o_github)
+### [Cleiton Lucas](link_para_o_linkedin) | [GitHub](https://github.com/CleitonLucas)
 - Development Team & Front-end
 
 ## Instalação e Uso
