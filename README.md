@@ -4,8 +4,8 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto 1, com o objet
 
 ## Tecnologias Utilizadas
 
-- ![](https://w7.pngwing.com/pngs/70/60/png-transparent-vue-js-javascript-library-github-github-angle-text-triangle-thumbnail.png)
-- Node.js
+- Vue.Js
+- Node.Js
 - Axios
 - Sequelize
 - Vuetify
@@ -23,13 +23,13 @@ Este projeto foi idealizado e implementado por:
 ### [Wilder Carvalho](https://www.linkedin.com/in/wilder-carvalho/) | [GitHub](http://github.com/wcarvalho98/)
 - Full Stack Developer
 
-### [Gabriel Vinicius](link_para_o_linkedin) | [GitHub](link_para_o_github)
+### [Gabriel Vinicius]([https://www.linkedin.com/in/gabriel-vinicius-4b7b96254]) | [GitHub](https://github.com/Gabxxxx)
 - Development Team & DBA
 
-### [Gean de Lima](link_para_o_linkedin) | [GitHub](link_para_o_github)
+### [Gean de Lima](link_para_o_linkedin) | [GitHub](https://github.com/Foccuns169)
 - Development Team & Front-end
 
-### [Cleiton Lucas](link_para_o_linkedin) | [GitHub](link_para_o_github)
+### [Cleiton Lucas](link_para_o_linkedin) | [GitHub](https://github.com/CleitonLucas)
 - Development Team & Front-end
 
 ## Instalação e Uso
