@@ -38,6 +38,16 @@ Este projeto foi idealizado e implementado por:
 
 Certifique-se de ter o MySQL instalado em sua máquina antes de prosseguir.
 
+## Versões do Node.js
+
+Este projeto foi testado e é compatível com as seguintes versões do Node.js:
+
+- Node.js 12.x
+- Node.js 14.x
+- Outras versões mais recentes também devem ser compatíveis, mas essas foram as versões testadas durante o desenvolvimento.
+
+Certifique-se de ter uma versão do Node.js instalada em sua máquina que seja igual ou superior às versões listadas acima para garantir o funcionamento adequado da aplicação.
+
 ### Passos
 
 1. **Clone o repositório:**
