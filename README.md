@@ -15,7 +15,7 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto de desenvolvim
 Este projeto foi idealizado e implementado por:
 
 ### [Emanoel Carvalho](https://www.linkedin.com/in/emanoelCarvalho/) | [![GitHub](https://img.shields.io/badge/GitHub-emanoelCarvalho-181717?logo=github)](https://github.com/emanoelCarvalho/)
-- Development Team & Back-end
+- Development Team & Full Stack Developer 
 
 ### [Wilder Carvalho](https://www.linkedin.com/in/wilder-carvalho/) | [![GitHub](https://img.shields.io/badge/GitHub-wcarvalho98-181717?logo=github)](http://github.com/wcarvalho98/)
 - Full Stack Developer
