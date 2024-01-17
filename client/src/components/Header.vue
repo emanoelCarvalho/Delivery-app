@@ -22,6 +22,7 @@ export default {
       <v-btn v-if="$store.getters.isAdmin" color="white" prepend-icon="mdi-logout-variant" text variant="tonal"
         @click="logout">Logout</v-btn>
       <v-btn v-else color="white" prepend-icon="mdi-login-variant" text variant="tonal" to="/login">Login</v-btn>
+      <v-btn color="white" prepend-icon="mdi-login-variant" text variant="tonal" to="/register">Register</v-btn>
     </div>
   </div>
 </template>
