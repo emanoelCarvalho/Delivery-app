@@ -5,7 +5,7 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto de desenvolvim
 ## Tecnologias Utilizadas
 
 - <img src="https://vuejs.org/images/logo.png" alt="Vue.js" width="30" height="30"> Vue.js
-- <img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg" alt="Node.js" width="30" height="30"> Node.js
+- <img src="https://nodejs.org/static/logos/jsIconGreen.svg" alt="Node.js" width="30" height="30"> Node.js
 - <img src="https://axios-http.com/assets/logo.svg" alt="Axios" width="30" height="30"> Axios
 - <img src="https://sequelize.org/img/logo.svg" alt="Sequelize" width="30" height="30"> Sequelize
 - <img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify" width="30" height="30"> Vuetify
